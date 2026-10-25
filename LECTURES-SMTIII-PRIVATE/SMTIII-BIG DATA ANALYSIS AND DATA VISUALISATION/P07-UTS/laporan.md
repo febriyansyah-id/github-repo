@@ -255,6 +255,8 @@ Chi-Square Test of Independence digunakan untuk menguji hubungan antara variabel
 
 ## 2.19 Ringkasan Metode dan Output
 
+<p align="center"><strong>Tabel 2.1. Ringkasan metode analisis dan output yang dihasilkan</strong></p>
+
 | Metode atau Model | Tujuan | Output |
 |---|---|---|
 | K-Means Clustering | Membentuk segmentasi transaksi | Label cluster dan centroid |
@@ -265,6 +267,8 @@ Chi-Square Test of Independence digunakan untuk menguji hubungan antara variabel
 | Kruskal-Wallis | Menguji perbedaan Sales, Discount, dan Profit antar-cluster | Statistik H dan p-value |
 | Spearman | Menguji hubungan Discount dan Profit | Koefisien rho dan p-value |
 | Chi-Square | Menguji hubungan Category dan Cluster | Nilai Chi-Square dan p-value |
+
+Tabel 2.1 menjelaskan fungsi setiap metode, alasan penggunaannya, serta bentuk output yang dihasilkan. K-Means digunakan untuk membentuk kelompok transaksi, sedangkan metrik validasi digunakan untuk menilai kualitas kelompok. Uji statistik digunakan sebagai pendukung interpretasi, bukan untuk menggantikan analisis profil cluster.
 
 ---
 
@@ -280,6 +284,8 @@ Dataset yang digunakan adalah `soal2_Superstore.csv`, yaitu berkas pendukung UTS
 
 ## 3.3 Variabel Penelitian
 
+<p align="center"><strong>Tabel 3.1. Variabel yang digunakan dalam penelitian</strong></p>
+
 | Variabel | Jenis | Peran |
 |---|---|---|
 | Sales | Numerik | Nilai penjualan |
@@ -288,6 +294,8 @@ Dataset yang digunakan adalah `soal2_Superstore.csv`, yaitu berkas pendukung UTS
 | Profit | Numerik | Keuntungan atau kerugian |
 | Category | Kategorikal | Kategori produk |
 | Region | Kategorikal | Wilayah transaksi |
+
+Tabel 3.1 menunjukkan enam variabel yang digunakan dalam penelitian. Sales dan Profit menggambarkan nilai ekonomi transaksi, Quantity menggambarkan volume pembelian, Discount menggambarkan insentif harga, sedangkan Category dan Region memberikan konteks produk serta wilayah. Keenam variabel tersebut dipilih karena secara langsung mendukung analisis profitabilitas dan efektivitas diskon.
 
 Enam variabel tersebut dipilih karena berkaitan langsung dengan nilai transaksi, volume pembelian, kebijakan diskon, profitabilitas, produk, dan lokasi pasar.
 
@@ -313,224 +321,199 @@ Enam variabel tersebut dipilih karena berkaitan langsung dengan nilai transaksi,
 
 ## 3.6 Evaluasi
 
-Evaluasi dilakukan melalui interpretasi ukuran dan rata-rata fitur setiap cluster. Untuk pengembangan selanjutnya, jumlah cluster dapat diuji menggunakan elbow method dan silhouette score.
+Evaluasi dilakukan melalui elbow method, Silhouette Score, Davies-Bouldin Index, Calinski-Harabasz Score, profil rata-rata fitur, serta pengujian statistik. Hasil evaluasi digunakan untuk menjelaskan kualitas pemisahan cluster dan karakteristik bisnis setiap kelompok.
 
 ---
 
 # BAB IV IMPLEMENTASI DAN HASIL
 
-Bab ini menyajikan proses implementasi secara berurutan. Seluruh proses akan dijalankan melalui `script.ipynb`. Notebook menghasilkan tabel dan visualisasi yang menjadi dasar pembahasan. Setelah setiap tabel atau gambar, hasil aktual akan dijelaskan berdasarkan output yang diperoleh.
+## 4.1 Pemuatan dan pemeriksaan data
 
-## 4.1 Pemuatan Dataset
+Dataset `soal2_Superstore.csv` berhasil dibaca menggunakan Pandas. Dataset awal berisi **10.993 baris dan 21 kolom**. Kolom mencakup atribut transaksi, pelanggan, produk, wilayah, Sales, Quantity, Discount, dan Profit. Sebanyak **999 baris duplikat** ditemukan. Setelah duplikasi dihapus, jumlah data menjadi **9.994 baris**.
 
-Tahap pertama adalah mengunggah dan membaca `soal2_Superstore.csv` menggunakan Pandas. Output yang dihasilkan:
+Pemeriksaan juga menunjukkan missing value pada sejumlah kolom. Pada enam fitur model, missing value awalnya adalah: Sales 1.646, Quantity 1.588, Discount 1.697, Profit 1.689, Category 1.671, dan Region 1.668. Kondisi ini menjadi alasan penggunaan imputasi pada tahap preprocessing.
 
-- Tabel lima baris pertama.
-- Tabel nama kolom dan tipe data.
-- Tabel dimensi dataset.
+![Jumlah missing value pada fitur analisis](hasil-analisis/gambar_missing_value.png)
+<p align="center"><em>Gambar 4.1. Jumlah missing value pada fitur analisis</em></p>
 
-**Tabel 4.1. Dimensi dan struktur dataset**
+Gambar 4.1 memperlihatkan jumlah nilai kosong pada Sales, Quantity, Discount, Profit, Category, dan Region. Nilai kosong muncul pada seluruh fitur analisis, sehingga data tidak dapat langsung dimasukkan ke model. Missing value numerik ditangani dengan median agar pengaruh nilai ekstrem lebih kecil, sedangkan missing value kategorikal diisi dengan modus agar proses encoding dapat dilakukan.
 
-> Output tabel dari notebook diletakkan di sini.
+## 4.2 Preprocessing
 
-**Pembahasan:** Uraikan jumlah baris, kolom, tipe data, dan kesesuaian dataset dengan tujuan penelitian.
+Fitur yang digunakan adalah Sales, Quantity, Discount, Profit, Category, dan Region. Missing value numerik diisi dengan median, sedangkan missing value kategorikal diisi dengan modus melalui `ColumnTransformer` dan `Pipeline`. Category dan Region diubah menggunakan one-hot encoding, sedangkan empat fitur numerik distandardisasi menggunakan `StandardScaler`.
 
-## 4.2 Pemeriksaan Kualitas Data
+Setelah preprocessing, matriks input model memiliki ukuran **9.994 baris dan 11 fitur**. Dengan demikian, data tidak lagi memiliki nilai kosong pada fitur yang digunakan oleh model dan seluruh fitur berada pada representasi yang dapat diproses K-Means.
 
-Pemeriksaan dilakukan terhadap missing value, data duplikat, nilai unik, dan statistik deskriptif. Notebook menghasilkan tabel jumlah missing value dan tabel statistik numerik.
+<p align="center"><strong>Tabel 4.1. Perbandingan kondisi data sebelum dan sesudah preprocessing</strong></p>
 
-**Gambar 4.1. Jumlah missing value setiap kolom**
+| Indikator | Sebelum preprocessing | Sesudah preprocessing |
+|---|---:|---:|
+| Jumlah baris | 10.993 | 9.994 |
+| Jumlah kolom awal | 21 | 11 fitur model |
+| Jumlah duplikasi | 999 | 0 |
+| Missing value pada fitur model | Ada | Ditangani dengan imputasi |
+| Fitur kategorikal | Category dan Region | One-hot encoding |
+| Fitur numerik | Sales, Quantity, Discount, Profit | Standardisasi |
 
-> Gambar hasil notebook diletakkan di sini.
+Tabel 4.1 menunjukkan perubahan utama dari data mentah menjadi data siap model. Jumlah baris berkurang karena 999 duplikasi dihapus. Jumlah fitur model menjadi 11 karena Category dan Region diubah menjadi beberapa kolom indikator melalui one-hot encoding. Missing value diisi menggunakan median untuk fitur numerik dan modus untuk fitur kategorikal sehingga data tetap dapat digunakan tanpa menghilangkan seluruh transaksi yang memiliki nilai kosong.
 
-**Pembahasan:** Jelaskan kolom dengan missing value terbanyak dan dampaknya terhadap analisis.
+## 4.3 Penentuan dan validasi jumlah cluster
 
-**Tabel 4.2. Pemeriksaan duplikasi dan statistik deskriptif**
+Notebook menghitung inertia untuk k=2 sampai k=8 serta tiga metrik validasi. Hasil terbaik tidak sama untuk semua metrik: Silhouette Score terbaik diperoleh pada k=5, sedangkan Davies-Bouldin Index dan Calinski-Harabasz Score terbaik pada k=8. Perbedaan ini menunjukkan bahwa tidak ada satu nilai k yang unggul mutlak pada seluruh ukuran.
 
-> Output tabel dari notebook diletakkan di sini.
+Penelitian ini mempertahankan **k=4** karena konfigurasi tersebut telah ditetapkan dalam rancangan analisis dan menghasilkan profil bisnis yang mudah dibedakan. Pemilihan ini harus dipahami sebagai segmentasi eksploratif, bukan klaim bahwa k=4 adalah satu-satunya jumlah cluster yang paling optimal secara matematis.
 
-**Pembahasan:** Jelaskan jumlah duplikasi, rentang nilai, nilai rata-rata, dan kemungkinan adanya nilai ekstrem.
+![Elbow method](hasil-analisis/gambar_elbow_method.png)
+<p align="center"><em>Gambar 4.2. Elbow method untuk k=2 sampai k=8</em></p>
 
-## 4.3 Eksplorasi Distribusi Data
+Gambar 4.2 menunjukkan penurunan inertia ketika jumlah cluster bertambah. Inertia selalu cenderung turun karena data dibagi ke dalam kelompok yang lebih banyak. Oleh sebab itu, grafik ini tidak digunakan secara tunggal; hasilnya dibandingkan dengan Silhouette Score, Davies-Bouldin Index, Calinski-Harabasz Score, dan kemudahan interpretasi bisnis.
 
-Distribusi Sales, Quantity, Discount, dan Profit akan divisualisasikan menggunakan histogram atau grafik distribusi. Outlier akan diamati menggunakan boxplot.
+<p align="center"><strong>Tabel 4.2. Metrik validasi untuk berbagai nilai k</strong></p>
 
-**Gambar 4.2. Distribusi fitur numerik**
+| k | Inertia | Silhouette | Davies-Bouldin | Calinski-Harabasz |
+|---:|---:|---:|---:|---:|
+| 2 | 46.370,8931 | 0,2158 | 2,2780 | 1.225,8758 |
+| 3 | 40.578,7715 | 0,1984 | 1,7249 | 1.413,4102 |
+| 4 | 35.877,9785 | 0,2462 | 1,4137 | 1.501,9197 |
+| 5 | 32.452,2314 | 0,2696 | 1,3745 | 1.508,8422 |
+| 6 | 29.857,3459 | 0,2115 | 1,5186 | 1.485,4585 |
+| 7 | 26.969,5103 | 0,2274 | 1,4460 | 1.548,5256 |
+| 8 | 24.329,1798 | 0,2364 | 1,3209 | 1.626,0257 |
 
-> Gambar hasil notebook diletakkan di sini.
+Tabel 4.2 menampilkan hasil lengkap metrik validasi untuk nilai k=2 sampai k=8. Inertia digunakan untuk elbow method, sedangkan Silhouette, Davies-Bouldin, dan Calinski-Harabasz digunakan untuk menilai kualitas pemisahan cluster. Silhouette tertinggi terdapat pada k=5, sementara Davies-Bouldin terendah dan Calinski-Harabasz tertinggi terdapat pada k=8. Nilai k=4 tetap digunakan karena memberikan segmentasi yang lebih sederhana dan mudah dikaitkan dengan tujuan analisis, dengan catatan bahwa pemilihan tersebut bersifat eksploratif.
 
-**Pembahasan:** Jelaskan bentuk distribusi dan kecenderungan data pada setiap fitur.
+## 4.4 Hasil pembentukan cluster
 
-**Gambar 4.3. Boxplot fitur numerik**
+Model yang digunakan adalah `KMeans(n_clusters=4, random_state=42, n_init=10)`. Distribusi anggota cluster adalah sebagai berikut.
 
-> Gambar hasil notebook diletakkan di sini.
+<p align="center"><strong>Tabel 4.3. Distribusi anggota dan interpretasi awal cluster</strong></p>
 
-**Pembahasan:** Jelaskan fitur yang memiliki nilai ekstrem dan keputusan apakah outlier dipertahankan atau ditangani.
+| Cluster | Jumlah transaksi | Persentase | Interpretasi awal |
+|---:|---:|---:|---|
+| 0 | 1.318 | 13,19% | Diskon tinggi dan profit negatif |
+| 1 | 12 | 0,12% | Transaksi bernilai sangat tinggi dan sangat profitabel |
+| 2 | 1.344 | 13,45% | Kuantitas tinggi dengan profit positif |
+| 3 | 7.320 | 73,24% | Transaksi umum dengan diskon rendah |
 
-## 4.4 Pembersihan dan Preprocessing
+Cluster 3 merupakan kelompok dominan, sedangkan Cluster 1 sangat kecil. Ketimpangan ini menunjukkan adanya sejumlah kecil transaksi ekstrem yang dipisahkan dari transaksi umum. Karena Cluster 1 hanya berisi 12 transaksi, interpretasinya perlu dilakukan secara hati-hati dan sebaiknya diverifikasi pada data asli.
 
-Data duplikat akan dihapus. Missing value numerik akan diisi menggunakan median, sedangkan missing value kategorikal akan diisi menggunakan modus. Category dan Region akan diproses dengan one-hot encoding. Sales, Quantity, Discount, dan Profit akan distandardisasi.
+![Jumlah transaksi per cluster](hasil-analisis/gambar_jumlah_cluster.png)
+<p align="center"><em>Gambar 4.3. Jumlah transaksi pada setiap cluster</em></p>
 
-**Tabel 4.3. Perbandingan kondisi data sebelum dan sesudah preprocessing**
+Gambar 4.3 memperlihatkan ketidakseimbangan ukuran cluster. Cluster 3 mendominasi data dengan 7.320 transaksi, sedangkan Cluster 1 hanya berisi 12 transaksi. Kondisi tersebut menunjukkan bahwa Cluster 1 kemungkinan merepresentasikan transaksi ekstrem atau khusus, sehingga kesimpulan mengenai cluster tersebut harus disampaikan dengan hati-hati.
 
-| Indikator | Sebelum Preprocessing | Sesudah Preprocessing | Perubahan yang Diharapkan |
+## 4.5 Profil cluster
+
+<p align="center"><strong>Tabel 4.4. Profil rata-rata fitur numerik setiap cluster</strong></p>
+
+| Cluster | Sales rata-rata | Quantity rata-rata | Discount rata-rata | Profit rata-rata |
+|---:|---:|---:|---:|---:|
+| 0 | 159,57 | 2,72 | 0,82 | -32,80 |
+| 1 | 10.610,80 | 4,75 | 0,09 | 3.429,80 |
+| 2 | 697,56 | 12,14 | 0,10 | 99,20 |
+| 3 | 131,45 | 2,06 | 0,01 | 21,62 |
+
+Cluster 0 merupakan kelompok yang paling jelas menunjukkan risiko kebijakan diskon. Rata-rata Discount sebesar 0,82 diikuti Profit negatif sebesar -32,80. Hal ini menunjukkan bahwa diskon tinggi pada kelompok ini tidak menghasilkan profitabilitas yang lebih baik.
+
+Cluster 1 memiliki Sales dan Profit rata-rata paling tinggi, tetapi hanya terdiri atas 12 transaksi. Kelompok ini dapat disebut transaksi premium atau transaksi bernilai ekstrem. Cluster 2 memiliki Quantity tertinggi, yaitu 12,14 unit per transaksi, dengan Sales dan Profit positif. Cluster 3 berisi sebagian besar transaksi, dengan diskon sangat rendah, Sales relatif rendah, dan Profit tetap positif.
+
+Pola pada grafik jumlah cluster, scatter Sales-Profit, dan grafik Discount-Profit mendukung interpretasi tersebut: Cluster 1 tampak sebagai titik transaksi bernilai tinggi, Cluster 0 terkonsentrasi pada diskon tinggi dan profit negatif, sedangkan Cluster 3 menjadi kelompok transaksi reguler.
+
+![Sales dan Profit berdasarkan cluster](hasil-analisis/gambar_sales_profit_cluster.png)
+<p align="center"><em>Gambar 4.4. Scatter plot Sales dan Profit berdasarkan cluster</em></p>
+
+Gambar 4.4 memperlihatkan posisi transaksi berdasarkan Sales dan Profit. Cluster 1 berada pada nilai Sales dan Profit yang sangat tinggi, sedangkan Cluster 0 mencakup transaksi dengan profit negatif. Cluster 3 terkonsentrasi pada area transaksi bernilai lebih rendah dan profit yang relatif kecil tetapi positif. Pola ini mendukung hasil rata-rata pada Tabel 4.4.
+
+![Perbandingan Discount dan Profit](hasil-analisis/gambar_discount_profit_cluster.png)
+<p align="center"><em>Gambar 4.5. Perbandingan rata-rata Discount dan Profit antarcluster</em></p>
+
+Gambar 4.5 membandingkan rata-rata Discount dan Profit antarcluster. Skala Profit jauh lebih besar daripada skala Discount, sehingga batang Discount tampak kecil pada grafik. Walaupun demikian, pola penting tetap terlihat: Cluster 0 memiliki Discount tertinggi dan Profit negatif, sedangkan Cluster 1 memiliki Profit tertinggi. Untuk membaca angka secara tepat, pembaca perlu merujuk Tabel 4.4.
+
+## 4.6 Pengujian statistik
+
+Kruskal-Wallis digunakan untuk membandingkan Sales, Discount, dan Profit antar-cluster. Karena cluster dibentuk menggunakan fitur-fitur tersebut, perbedaan antar-cluster memang diharapkan dan hasil uji statistik harus ditafsirkan sebagai bukti perbedaan distribusi, bukan sebagai hubungan sebab-akibat.
+
+<p align="center"><strong>Tabel 4.5. Hasil uji Kruskal-Wallis</strong></p>
+
+| Variabel | Statistik H | p-value | Keputusan pada α=0,05 |
 |---|---:|---:|---|
-| Jumlah baris | Diisi dari output notebook | Diisi dari output notebook | Duplikasi dihapus |
-| Jumlah kolom awal | Diisi dari output notebook | Diisi dari output notebook | Fitur analisis dipilih |
-| Jumlah missing value numerik | Diisi dari output notebook | 0 pada fitur model | Diisi dengan median |
-| Jumlah missing value kategorikal | Diisi dari output notebook | 0 pada fitur model | Diisi dengan modus |
-| Jumlah baris duplikat | Diisi dari output notebook | 0 | Duplikasi dihapus |
-| Jumlah fitur numerik | 4 | 4 | Distandardisasi |
-| Jumlah fitur kategorikal | 2 | Berubah menjadi fitur hasil encoding | One-hot encoding |
-| Skala fitur numerik | Beragam | Sejajar/terstandardisasi | StandardScaler |
-| Status data | Belum siap dimodelkan | Siap digunakan untuk K-Means | Pemeriksaan akhir |
+| Sales | 524,6686 | 2,15 × 10⁻¹¹³ | Berbeda signifikan |
+| Discount | 3.628,9535 | < 0,001 | Berbeda signifikan |
+| Profit | 439,5899 | 5,87 × 10⁻⁹⁵ | Berbeda signifikan |
 
-**Pembahasan:** Jelaskan perubahan jumlah baris, jumlah missing value, jumlah fitur, dan kesiapan data untuk model.
+Ketiga p-value lebih kecil dari 0,05. Oleh karena itu, terdapat bukti bahwa distribusi Sales, Discount, dan Profit berbeda antar-cluster. Hasil ini konsisten dengan profil cluster, tetapi tidak berarti bahwa clustering membuktikan pengaruh diskon terhadap profit.
 
-## 4.5 Penentuan Jumlah Cluster
+Korelasi Spearman antara Discount dan Profit digunakan sebagai analisis tambahan. Hasil korelasi tidak boleh diterjemahkan sebagai bukti bahwa diskon secara langsung menyebabkan perubahan profit. Untuk menyatakan pengaruh, diperlukan analisis lanjutan yang mengendalikan faktor lain seperti produk, wilayah, kuantitas, dan waktu.
 
-Sebelum model final ditetapkan, nilai k dapat dibandingkan menggunakan elbow method dan silhouette score. Hasil ini digunakan untuk mendukung pemilihan jumlah cluster.
+Koefisien Spearman diperoleh sebesar **-0,2503** dengan p-value **1,43 × 10⁻¹⁰²**. Hubungan tersebut negatif, signifikan secara statistik, tetapi kekuatannya lemah sampai sedang. Artinya, pada dataset ini kenaikan Discount cenderung berasosiasi dengan penurunan Profit, namun Discount bukan satu-satunya faktor yang menentukan profitabilitas.
 
-**Gambar 4.4. Elbow method**
+<p align="center"><strong>Tabel 4.6. Hasil korelasi Spearman Discount dan Profit</strong></p>
 
-> Gambar hasil notebook diletakkan di sini.
+| Variabel X | Variabel Y | Rho Spearman | p-value | Interpretasi |
+|---|---|---:|---:|---|
+| Discount | Profit | -0,2503 | 1,43 × 10⁻¹⁰² | Hubungan negatif dan signifikan |
 
-**Gambar 4.5. Silhouette score untuk beberapa nilai k**
+Tabel 4.6 menunjukkan hubungan monotonic negatif yang lemah sampai sedang. Hasil ini merupakan asosiasi dan bukan bukti kausalitas.
 
-> Gambar hasil notebook diletakkan di sini jika pengujian silhouette dijalankan.
+Chi-Square digunakan untuk menguji keterkaitan Category dengan Cluster. Jika p-value kurang dari 0,05, distribusi kategori produk berbeda secara signifikan antar-cluster. Hasil ini dapat membantu menjelaskan apakah segmentasi profitabilitas juga berkaitan dengan kategori produk.
 
-**Pembahasan:** Jelaskan alasan pemilihan jumlah cluster berdasarkan pola grafik dan pertimbangan interpretasi bisnis.
+<p align="center"><strong>Tabel 4.7. Tabel kontingensi Category dan Cluster</strong></p>
 
-## 4.6 Validasi Internal Model
+Tabel kontingensi Category dan Cluster menunjukkan jumlah berikut.
 
-Notebook akan menghitung Silhouette Score, Davies-Bouldin Index, dan Calinski-Harabasz Score untuk beberapa nilai k. Output akan disajikan dalam tabel dan digunakan bersama Elbow Method untuk menentukan jumlah cluster yang paling sesuai.
+| Category | Cluster 0 | Cluster 1 | Cluster 2 | Cluster 3 |
+|---|---:|---:|---:|---:|
+| Furniture | 252 | 0 | 305 | 1.249 |
+| Missing | 202 | 4 | 187 | 1.112 |
+| Office Supplies | 745 | 2 | 586 | 3.780 |
+| Technology | 119 | 6 | 266 | 1.179 |
 
-**Tabel 4.4. Perbandingan metrik validasi cluster**
+Uji Chi-Square menghasilkan χ²=113,9216, derajat bebas 9, dan p-value **2,33 × 10⁻²⁰**. Dengan demikian, terdapat hubungan signifikan antara Category dan Cluster. Namun, hubungan ini bersifat asosiasi dan tidak dapat langsung dianggap sebagai hubungan sebab-akibat.
 
-> Tabel berisi nilai k, inertia, Silhouette Score, Davies-Bouldin Index, dan Calinski-Harabasz Score dari notebook.
+<p align="center"><strong>Tabel 4.8. Hasil uji Chi-Square Category dan Cluster</strong></p>
 
-**Pembahasan:** Jelaskan nilai k yang memiliki Silhouette Score dan Calinski-Harabasz tertinggi serta Davies-Bouldin terendah. Jika metrik tidak memberikan rekomendasi yang sama, jelaskan alasan pemilihan konfigurasi final.
+| Statistik Chi-Square | Derajat bebas | p-value | Keputusan |
+|---:|---:|---:|---|
+| 113,9216 | 9 | 2,33 × 10⁻²⁰ | Terdapat hubungan signifikan |
 
-## 4.7 Pembentukan Model K-Means
+## 4.7 Ringkasan hasil
 
-Model K-Means akan dijalankan menggunakan jumlah cluster terpilih, `random_state=42`, dan `n_init=10`. Setiap baris akan diberi label cluster.
+<p align="center"><strong>Tabel 4.9. Ringkasan hasil utama penelitian</strong></p>
 
-**Tabel 4.4. Jumlah anggota setiap cluster**
+| Aspek | Hasil |
+|---|---|
+| Data awal | 10.993 baris, 21 kolom |
+| Duplikasi | 999 baris |
+| Data setelah deduplikasi | 9.994 baris |
+| Fitur setelah encoding | 11 fitur |
+| Model | K-Means, k=4, random_state=42 |
+| Cluster terbesar | Cluster 3, 7.320 transaksi |
+| Cluster dengan diskon tertinggi | Cluster 0, Discount 0,82 |
+| Cluster dengan profit terendah | Cluster 0, Profit -32,80 |
+| Cluster dengan Sales tertinggi | Cluster 1, Sales 10.610,80 |
+| Cluster dengan Quantity tertinggi | Cluster 2, Quantity 12,14 |
 
-> Output tabel dari notebook diletakkan di sini.
+Hasil tersebut menjawab tujuan penelitian: transaksi dapat dikelompokkan berdasarkan karakteristik nilai penjualan, kuantitas, diskon, profit, kategori, dan wilayah. Temuan utama adalah bahwa diskon tinggi tidak otomatis meningkatkan profit. Pada data ini, kelompok dengan diskon tertinggi justru memiliki rata-rata profit negatif.
 
-**Gambar 4.6. Distribusi jumlah transaksi per cluster**
+# BAB V KESIMPULAN DAN SARAN
 
-> Gambar hasil notebook diletakkan di sini.
+## 5.1 Kesimpulan
 
-**Pembahasan:** Jelaskan ukuran setiap cluster dan apakah terdapat cluster yang terlalu kecil atau terlalu dominan.
+1. Dataset Superstore terdiri atas 10.993 baris dan 21 kolom. Ditemukan 999 baris duplikat sehingga data yang digunakan setelah pembersihan berjumlah 9.994 baris.
+2. Missing value pada fitur numerik ditangani dengan median, missing value kategorikal dengan modus, Category dan Region melalui one-hot encoding, serta fitur numerik melalui standardisasi. Hasil preprocessing menghasilkan 11 fitur model.
+3. K-Means dengan empat cluster menghasilkan distribusi yang tidak seimbang: Cluster 0 berjumlah 1.318, Cluster 1 berjumlah 12, Cluster 2 berjumlah 1.344, dan Cluster 3 berjumlah 7.320 transaksi.
+4. Cluster 0 memiliki diskon rata-rata tertinggi, yaitu 0,82, tetapi profit rata-ratanya negatif sebesar -32,80. Temuan ini menunjukkan bahwa diskon tinggi tidak selalu efektif untuk menghasilkan keuntungan.
+5. Cluster 1 memiliki Sales dan Profit rata-rata tertinggi, tetapi ukurannya sangat kecil sehingga lebih tepat dipandang sebagai kelompok transaksi bernilai ekstrem. Cluster 2 memiliki kuantitas rata-rata tertinggi, sedangkan Cluster 3 merupakan transaksi umum dengan diskon rendah dan profit positif.
+6. Hasil clustering dapat digunakan untuk mengevaluasi strategi diskon, tetapi tidak membuktikan hubungan sebab-akibat. Keputusan bisnis sebaiknya mempertimbangkan ukuran cluster, stabilitas model, kategori produk, wilayah, dan faktor biaya lainnya.
 
-## 4.8 Profil dan Visualisasi Cluster
+## 5.2 Saran
 
-Profil cluster akan dihitung berdasarkan rata-rata Sales, Quantity, Discount, dan Profit. Distribusi Category dan Region pada setiap cluster juga akan diperiksa.
-
-**Tabel 4.5. Profil rata-rata fitur numerik setiap cluster**
-
-> Output tabel dari notebook diletakkan di sini.
-
-**Gambar 4.7. Scatter plot Sales dan Profit berdasarkan cluster**
-
-> Gambar hasil notebook diletakkan di sini.
-
-**Gambar 4.8. Perbandingan Discount dan Profit antarcluster**
-
-> Gambar hasil notebook diletakkan di sini.
-
-**Pembahasan:** Jelaskan cluster dengan diskon tinggi, profit negatif, Sales tinggi, Quantity tinggi, dan karakteristik transaksi reguler.
-
-## 4.9 Pengujian Statistik
-
-### 4.9.1 Kruskal-Wallis Test
-
-Kruskal-Wallis Test akan dilakukan terhadap Sales, Discount, dan Profit berdasarkan label cluster.
-
-**Tabel 4.7. Hasil Kruskal-Wallis Test**
-
-> Tabel berisi variabel, statistik H, p-value, dan keputusan pada alpha 0,05.
-
-**Pembahasan:** Jika p-value kurang dari 0,05, variabel dinyatakan berbeda signifikan antar-cluster. Jika tidak, tidak terdapat cukup bukti statistik untuk menyatakan adanya perbedaan.
-
-### 4.9.2 Korelasi Spearman
-
-Korelasi Spearman akan menguji hubungan antara Discount dan Profit.
-
-**Tabel 4.8. Hasil Korelasi Spearman**
-
-> Tabel berisi koefisien rho, p-value, dan keputusan pengujian.
-
-**Pembahasan:** Jelaskan arah hubungan, kekuatan hubungan, dan signifikansinya. Korelasi tidak boleh ditafsirkan sebagai hubungan sebab-akibat.
-
-### 4.9.3 Chi-Square Test
-
-Chi-Square Test akan menguji hubungan antara Category dan Cluster. Tabel kontingensi juga akan ditampilkan untuk memperlihatkan distribusi kategori pada setiap cluster.
-
-**Tabel 4.9. Tabel Kontingensi Category dan Cluster**
-
-> Output tabel kontingensi dari notebook diletakkan di sini.
-
-**Tabel 4.10. Hasil Chi-Square Test**
-
-> Tabel berisi nilai Chi-Square, derajat bebas, p-value, dan keputusan pengujian.
-
-**Pembahasan:** Jika p-value kurang dari 0,05, terdapat hubungan signifikan antara kategori produk dan cluster.
-
-## 4.10 Pengujian Hasil dan Interpretasi
-
-Pengujian akan dilakukan menggunakan indikator berikut:
-
-| No. | Aspek Pengujian | Kriteria |
-|---:|---|---|
-| 1 | Pembacaan data | Dataset terbaca tanpa error |
-| 2 | Kualitas data | Missing value dan duplikasi teridentifikasi |
-| 3 | Preprocessing | Data siap digunakan dan fitur model tidak kosong |
-| 4 | Validasi cluster | Elbow, Silhouette, Davies-Bouldin, dan Calinski-Harabasz berhasil dihitung |
-| 5 | Pembentukan model | K-Means menghasilkan label cluster |
-| 6 | Distribusi cluster | Jumlah anggota dapat dihitung |
-| 7 | Profil cluster | Rata-rata fitur setiap cluster tersedia |
-| 8 | Kruskal-Wallis | Statistik H dan p-value tersedia |
-| 9 | Spearman | Koefisien rho dan p-value tersedia |
-| 10 | Chi-Square | Nilai Chi-Square dan p-value tersedia |
-| 11 | Visualisasi | Chart dan tabel dapat dihasilkan |
-| 12 | Interpretasi | Setiap cluster memiliki karakteristik yang dapat dijelaskan |
-| 13 | Ekspor | File hasil dapat disimpan sebagai CSV |
-
-**Tabel 4.11. Rekapitulasi hasil pengujian**
-
-> Tabel diisi berdasarkan output aktual setelah notebook dijalankan.
-
-**Pembahasan:** Jelaskan status setiap pengujian berdasarkan bukti output, bukan berdasarkan perkiraan.
-
----
-
-# BAB V KESIMPULAN DAN SARAN SEMENTARA
-
-Bab ini belum memuat kesimpulan akhir karena hasil implementasi dan pengujian belum dijalankan dalam notebook. Kesimpulan final harus ditulis setelah output aktual diperoleh.
-
-## 5.1 Format Kesimpulan Setelah Pengujian
-
-Kesimpulan akhir akan memuat:
-
-1. Hasil pemeriksaan dimensi, missing value, dan duplikasi dataset.
-2. Jumlah data setelah preprocessing.
-3. Fitur yang berhasil digunakan dalam model.
-4. Jumlah cluster dan jumlah anggota setiap cluster.
-5. Karakteristik profitabilitas dan diskon pada masing-masing cluster.
-6. Jawaban atas pertanyaan apakah pola diskon tinggi berkaitan dengan profitabilitas yang lebih baik berdasarkan hasil clustering.
-
-## 5.2 Saran Sementara
-
-Saran berikut masih bersifat rencana dan akan disesuaikan dengan hasil pengujian:
-
-1. Mengevaluasi cluster yang memiliki diskon tinggi dan profit negatif.
-2. Menguji jumlah cluster menggunakan elbow method atau silhouette score.
-3. Menambahkan variabel biaya pengiriman, subkategori produk, dan waktu transaksi pada penelitian lanjutan.
-4. Menggunakan analisis korelasi atau regresi apabila diperlukan pengukuran pengaruh diskon terhadap profit.
-5. Mengembangkan hasil clustering menjadi dashboard interaktif setelah profil cluster final diperoleh.
+1. Perusahaan perlu mengevaluasi transaksi pada Cluster 0, terutama aturan diskon yang menghasilkan profit negatif.
+2. Cluster 1 perlu diperiksa sebagai transaksi ekstrem untuk memastikan tidak terdapat kesalahan input, transaksi khusus, atau karakteristik pelanggan yang berbeda.
+3. Penelitian lanjutan sebaiknya membandingkan k=4 dengan k=5 dan k=8 karena metrik validasi memberikan rekomendasi yang berbeda.
+4. Analisis berikutnya dapat menambahkan Sub-Category, Ship Mode, waktu transaksi, biaya pengiriman, dan margin agar efektivitas diskon dapat dianalisis lebih lengkap.
+5. Untuk mengukur pengaruh diskon, gunakan regresi atau analisis kausal dengan mengendalikan Sales, Quantity, Category, Region, dan periode transaksi.
+6. Hasil cluster dapat dikembangkan menjadi dashboard yang menampilkan profit, diskon, jumlah transaksi, dan rekomendasi tindakan untuk setiap kelompok.
 
 ---
 
