@@ -1,26 +1,26 @@
 # Review Paper
 
-## QLoRA: Efficient Finetuning of Quantized LLMs
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, dan Luke Zettlemoyer (**2023**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *QLoRA: Efficient Finetuning of Quantized LLMs*
 
-### Nama Conference
+#### Nama Conference
 
 Paper ini dipublikasikan pada **Advances in Neural Information Processing Systems (NeurIPS 2023)**. Versi awal tersedia sebagai preprint arXiv pada tahun 2023.
 
 DOI: `10.52202/075280-0441`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 QLoRA dikembangkan untuk mengurangi kebutuhan memori saat melakukan fine-tuning Large Language Model berukuran besar, dengan tetap mempertahankan performa yang mendekati fine-tuning 16-bit penuh.
 
-### Dataset dan Evaluasi
+### Dataset dan evaluasi
 
 Penelitian mengevaluasi QLoRA pada lebih dari 1.000 model menggunakan delapan instruction datasets, beberapa tipe model seperti LLaMA dan T5, serta ukuran model yang berbeda.
 
@@ -35,7 +35,7 @@ Evaluasi mencakup:
 
 Model hasil fine-tuning, yang disebut **Guanaco**, dievaluasi menggunakan Vicuna benchmark dan beberapa tugas zero-shot.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 QLoRA menggabungkan tiga komponen utama:
 
@@ -47,8 +47,6 @@ QLoRA mempertahankan pretrained language model dalam kondisi frozen dan terkuant
 
 ![Perbandingan kebutuhan memori metode fine-tuning](IMAGE/finetuning-memory.png)
 
-### Alur Training
-
 Alur kerja QLoRA adalah:
 
 1. Pretrained LLM dikuantisasi ke format 4-bit NF4.
@@ -59,9 +57,9 @@ Alur kerja QLoRA adalah:
 
 ![Performa LoRA berdasarkan konfigurasi adapter](IMAGE/lora-performance.png)
 
-### Tugas NLP
+### Domain penelitian
 
-QLoRA digunakan untuk fine-tuning model bahasa pada tugas:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. QLoRA digunakan untuk fine-tuning model bahasa pada tugas:
 
 - instruction following;
 - dialogue generation;
@@ -69,7 +67,7 @@ QLoRA digunakan untuk fine-tuning model bahasa pada tugas:
 - language modeling;
 - text generation.
 
-### Hasil Utama
+### Hasil utama
 
 QLoRA memungkinkan fine-tuning model 65B parameter pada satu GPU 48GB dengan performa yang mendekati fine-tuning 16-bit penuh.
 
@@ -81,7 +79,7 @@ Eksperimen juga menunjukkan bahwa NF4 memberikan performa lebih baik dibandingka
 
 ![Perbandingan memory footprint model LLaMA](IMAGE/memory-footprint.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama QLoRA adalah:
 
@@ -106,7 +104,7 @@ Kontribusi utama QLoRA adalah:
 - LoRA adapter tidak selalu mampu merepresentasikan seluruh perubahan yang diperlukan oleh setiap domain.
 - Evaluasi chatbot dapat dipengaruhi oleh keterbatasan benchmark dan bias penilaian otomatis.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 QLoRA menunjukkan bahwa fine-tuning LLM berukuran besar dapat dilakukan secara lebih hemat memori dengan menggabungkan quantization 4-bit, NF4, Double Quantization, Paged Optimizer, dan Low-Rank Adapter. Pendekatan ini menjaga pretrained model tetap frozen dan hanya melatih parameter adapter, sehingga jumlah parameter serta kebutuhan memori dapat ditekan.
 

@@ -1,26 +1,26 @@
 # Review Paper
 
-## Enriching the Low-Resource Neural Machine Translation with Large Language Model
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Sachin Giri, Takashi Ninomiya, dan Isao Goto (**2026**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Enriching the Low-Resource Neural Machine Translation with Large Language Model*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian **peer-reviewed** pada **Journal of Natural Language Processing**, Volume 33, Issue 3, halaman 1460-1483, tahun 2026. Artikel tersedia secara open access.
 
 DOI: `10.5715/jnlp.33.1460`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengatasi keterbatasan parallel corpus pada neural machine translation (NMT) untuk bahasa sumber daya rendah. Penulis memanfaatkan kemampuan Large Language Model (LLM) untuk membantu model NMT yang lebih kecil.
 
-### Dataset dan Skenario Eksperimen
+### Dataset dan evaluasi
 
 Eksperimen dilakukan pada empat arah penerjemahan:
 
@@ -31,7 +31,7 @@ Eksperimen dilakukan pada empat arah penerjemahan:
 
 Jumlah data parallel dibatasi untuk mensimulasikan kondisi low-resource. Evaluasi menggunakan **BLEU** dan **COMET**.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Metode yang diusulkan menggunakan LLM sebagai **teacher** dan NMT sebagai **student**. Pengetahuan dari LLM dimasukkan ke model penerjemahan sebagai prior distribution melalui knowledge distillation.
 
@@ -47,11 +47,11 @@ Alur utama metode adalah:
 
 ![Kerangka knowledge distillation dari LLM ke model NMT](IMAGE/llm-kd-framework.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada **Neural Machine Translation**, yaitu menerjemahkan teks dari satu bahasa ke bahasa lain menggunakan model neural. Fokus khususnya adalah penerjemahan pada kondisi data parallel yang terbatas.
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada **Neural Machine Translation**, yaitu menerjemahkan teks dari satu bahasa ke bahasa lain menggunakan model neural. Fokus khususnya adalah penerjemahan pada kondisi data parallel yang terbatas.
 
-### Hasil Utama
+### Hasil utama
 
 Penggunaan LLM sebagai teacher menghasilkan peningkatan skor BLEU dan COMET pada beberapa kondisi low-resource dibandingkan model NMT tanpa pengetahuan LLM.
 
@@ -61,7 +61,7 @@ Penelitian juga menganalisis pengaruh hyperparameter knowledge distillation terh
 
 ![Heatmap BLEU score pada eksperimen knowledge distillation](IMAGE/bleu-heatmap.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama metode ini adalah:
 
@@ -85,7 +85,7 @@ Kontribusi utama metode ini adalah:
 - Generalisasi ke bahasa dengan script atau struktur yang sangat berbeda masih perlu diuji.
 - Kinerja model bergantung pada kualitas LLM teacher dan desain prompt.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 Metode ini menggunakan LLM sebagai teacher untuk mentransfer pengetahuan distribusi bahasa ke model NMT melalui knowledge distillation pada kondisi low-resource. Peningkatan BLEU dan COMET pada beberapa pasangan bahasa menunjukkan bahwa prior dari LLM dapat membantu student model ketika parallel corpus terbatas. Keuntungan deployment diperoleh karena inference dapat dilakukan hanya dengan model NMT, meskipun proses training tetap memerlukan sumber daya dan akses terhadap LLM.
 

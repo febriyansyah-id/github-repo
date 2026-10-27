@@ -1,26 +1,26 @@
 # Review Paper
 
-## Training-Free Layer Selection for Partial Fine-Tuning of Language Models
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Aldrin Kabya Biswas, Md Fahim, Md Tahmid Hasan Fuad, Akm Moshiur Rahman Mazumder, Amin Ahsan Ali, dan AKM Mahbubur Rahman (**2026**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Training-Free Layer Selection for Partial Fine-Tuning of Language Models*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian pada **Information Sciences**, Volume 740, Article 123204, tahun 2026. Artikel tersedia secara open access.
 
 DOI: `10.1016/j.ins.2026.123204`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengurangi biaya fine-tuning pada pretrained language model dengan memilih hanya layer Transformer yang paling relevan untuk tugas tertentu. Tujuannya adalah mengurangi jumlah parameter trainable dan mempercepat training tanpa penurunan performa yang besar.
 
-### Dataset dan Evaluasi
+### Dataset dan evaluasi
 
 Metode diuji pada **16 dataset NLP** yang mencakup:
 
@@ -32,7 +32,7 @@ Metode diuji pada **16 dataset NLP** yang mencakup:
 
 Evaluasi membandingkan akurasi, jumlah parameter yang dilatih, training speedup, dan ketahanan terhadap perubahan domain.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Metode yang diusulkan menggunakan dua tahap utama:
 
@@ -42,8 +42,6 @@ Metode yang diusulkan menggunakan dua tahap utama:
 ![Metodologi training-free layer selection](IMAGE/methodology.png)
 
 Token representatif dapat berupa token `[CLS]` pada model encoder atau token terakhir pada model decoder. Dengan demikian, pemilihan layer tidak memerlukan training tambahan.
-
-### Strategi Pemilihan Layer
 
 Penelitian membandingkan beberapa strategi:
 
@@ -58,11 +56,11 @@ Pola layer yang optimal berbeda-beda bergantung pada tugas. Beberapa tugas lebih
 
 ![Pola pemilihan layer pada berbagai tugas NLP](IMAGE/task-layer-patterns.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada efisiensi fine-tuning untuk berbagai tugas NLP berbasis pretrained language model, termasuk klasifikasi teks, natural language inference, semantic similarity, dan text generation.
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada efisiensi fine-tuning untuk berbagai tugas NLP berbasis pretrained language model, termasuk klasifikasi teks, natural language inference, semantic similarity, dan text generation.
 
-### Hasil Utama
+### Hasil utama
 
 Hasil penelitian menunjukkan bahwa metode yang diusulkan:
 
@@ -76,7 +74,7 @@ Metode juga tidak menunjukkan penurunan performa yang berarti ketika model dieva
 
 ![Perbandingan akurasi dan speedup](IMAGE/accuracy-speedup.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama penelitian ini adalah:
 
@@ -101,7 +99,7 @@ Kontribusi utama penelitian ini adalah:
 - Evaluasi pada model dan arsitektur yang lebih besar masih perlu diperluas.
 - Partial fine-tuning dapat memerlukan pencarian strategi selection yang sesuai.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 Training-free layer selection menggunakan cosine similarity antar-layer untuk menentukan bagian Transformer yang paling relevan terhadap tugas downstream. Partial fine-tuning berdasarkan skor tersebut mengurangi parameter trainable, mempercepat training, dan mempertahankan performa pada berbagai tugas NLP. Efektivitas metode tetap bergantung pada pola representasi tiap tugas, sehingga strategi pemilihan layer perlu dievaluasi sebelum diterapkan pada model atau domain baru.
 

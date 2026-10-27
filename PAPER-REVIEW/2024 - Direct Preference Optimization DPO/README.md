@@ -1,26 +1,26 @@
 # Review Paper
 
-## Direct Preference Optimization: Your Language Model is Secretly a Reward Model
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, dan Chelsea Finn (**2023**; versi arXiv diperbarui pada 2024).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*
 
-### Nama Conference
+#### Nama Conference
 
 Paper ini dipublikasikan pada **Advances in Neural Information Processing Systems (NeurIPS 2023)**.
 
 DOI: `10.52202/075280-2338`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengembangkan metode alignment language model yang lebih sederhana daripada Reinforcement Learning from Human Feedback (RLHF). DPO bertujuan mengoptimalkan model berdasarkan preferensi manusia tanpa perlu melatih reward model secara terpisah dan menjalankan reinforcement learning berbasis policy optimization.
 
-### Data dan Evaluasi
+### Dataset dan evaluasi
 
 DPO dievaluasi pada beberapa tugas alignment dan text generation, termasuk:
 
@@ -32,7 +32,7 @@ DPO dievaluasi pada beberapa tugas alignment dan text generation, termasuk:
 
 Eksperimen membandingkan DPO dengan PPO-based RLHF, Preferred-Finetuning, dan beberapa baseline sampling.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 DPO memanfaatkan hubungan matematis antara reward function dan optimal policy. Dengan parameterisasi tersebut, objective RLHF dapat diubah menjadi objective klasifikasi langsung pada pasangan respons yang dipilih dan ditolak oleh manusia.
 
@@ -48,9 +48,9 @@ Alur DPO adalah:
 
 Secara konseptual, DPO tetap mempertahankan kontrol terhadap perubahan policy melalui regularisasi KL terhadap reference policy, tetapi menghindari loop reinforcement learning yang kompleks.
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada:
 
 - language model alignment;
 - preference optimization;
@@ -58,7 +58,7 @@ Paper ini berfokus pada:
 - dialogue generation;
 - sentiment-controlled generation.
 
-### Hasil Utama
+### Hasil utama
 
 DPO menghasilkan frontier reward-KL yang lebih efisien dibandingkan metode pembanding pada eksperimen sentiment control.
 
@@ -68,7 +68,7 @@ Pada tugas summarization, DPO memperoleh win rate sekitar **61%**, lebih tinggi 
 
 ![Hasil evaluasi single-turn dialogue](IMAGE/dialogue-results.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama DPO adalah:
 
@@ -94,7 +94,7 @@ Kontribusi utama DPO adalah:
 - DPO tidak secara otomatis menyelesaikan masalah factuality atau reasoning.
 - Evaluasi berbasis GPT-4 dan human preference tetap memiliki potensi bias.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 DPO merumuskan alignment language model sebagai optimasi langsung terhadap pasangan respons berdasarkan preferensi manusia. Dengan memanfaatkan hubungan antara reward function dan optimal policy, metode ini mengubah objective RLHF menjadi classification loss sehingga reward model dan policy optimization berbasis reinforcement learning tidak lagi diperlukan.
 

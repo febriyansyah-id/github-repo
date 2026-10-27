@@ -1,26 +1,26 @@
 # Review Paper
 
-## Advancing Few-Shot Named Entity Recognition with Large Language Model
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Yuhui Xiao, Jianjian Zou, dan Qun Yang (**2025**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Advancing Few-Shot Named Entity Recognition with Large Language Model*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian pada **Applied Sciences**, Volume 15, Article 3838, tahun 2025. Artikel tersedia secara open access.
 
 DOI: `10.3390/app15073838`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini meningkatkan performa few-shot Named Entity Recognition (NER) ketika distribusi data pada support set dan query set berbeda. Masalah tersebut dapat menyebabkan model metric learning menghasilkan prediksi dengan tingkat keyakinan rendah.
 
-### Dataset
+### Dataset dan evaluasi
 
 Eksperimen dilakukan pada dua benchmark few-shot NER:
 
@@ -29,7 +29,7 @@ Eksperimen dilakukan pada dua benchmark few-shot NER:
 
 Evaluasi dilakukan dalam skenario few-shot menggunakan metrik **micro-F1**.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Framework yang diusulkan menggabungkan **small language model (SLM)** berbasis metric learning dengan **large language model (LLM)** sebagai pemeriksa kedua.
 
@@ -49,13 +49,13 @@ Penelitian juga menguji beberapa strategi prompting, yaitu chain-of-thought, met
 
 ![Template prompt klasifikasi kandidat entitas](IMAGE/prompt-template.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada **few-shot Named Entity Recognition**, yaitu mengenali dan memberi label pada entitas dalam teks menggunakan jumlah contoh berlabel yang terbatas.
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada **few-shot Named Entity Recognition**, yaitu mengenali dan memberi label pada entitas dalam teks menggunakan jumlah contoh berlabel yang terbatas.
 
 Contoh kategori entitas dapat berupa orang, lokasi, organisasi, produk, atau istilah khusus domain.
 
-### Hasil Utama
+### Hasil utama
 
 Metode kolaboratif yang diusulkan meningkatkan micro-F1 dibandingkan metode state-of-the-art sebelumnya:
 
@@ -66,7 +66,7 @@ Metode kolaboratif yang diusulkan meningkatkan micro-F1 dibandingkan metode stat
 
 Hasil tersebut menunjukkan bahwa LLM dapat membantu memperbaiki prediksi SLM, terutama ketika query memiliki kemiripan rendah dengan contoh pada support set.
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama framework adalah:
 
@@ -89,7 +89,7 @@ Kontribusi utama framework adalah:
 - Pemilihan threshold similarity dapat memengaruhi jumlah query yang diteruskan ke LLM.
 - Efisiensi untuk pemrosesan NER berskala sangat besar masih perlu diteliti.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 Paper ini mengusulkan framework hybrid yang menggabungkan metric-learning NER untuk prediksi awal dengan LLM untuk memperbaiki kasus yang memiliki tingkat keyakinan rendah. Strategi label-filtering dan prompt terstruktur membantu mengurangi ruang klasifikasi LLM. Hasil pada Few-NERD dan CrossNER menunjukkan bahwa kolaborasi SLM-LLM efektif untuk NER dengan data berlabel terbatas, meskipun konsekuensinya adalah tambahan latensi dan biaya inferensi.
 

@@ -1,32 +1,32 @@
 # Review Paper
 
-## Improving Few-Shot Named Entity Recognition for Large Language Models Using Structured Dynamic Prompting with Retrieval Augmented Generation
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Yao Ge, Yuting Guo, Sudeshna Das, dan Abeed Sarker (**2026**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Improving Few-Shot Named Entity Recognition for Large Language Models Using Structured Dynamic Prompting with Retrieval Augmented Generation*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian pada **npj Artificial Intelligence**, Volume 2, Article 39, tahun 2026. Artikel tersedia secara open access.
 
 DOI: `10.1038/s44387-025-00062-2`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini meningkatkan few-shot Biomedical Named Entity Recognition (NER) menggunakan structured prompting dan Retrieval-Augmented Generation (RAG). Fokusnya adalah mengurangi kebutuhan data anotasi pada domain biomedis yang memiliki istilah khusus dan perubahan domain yang besar.
 
-### Dataset
+### Dataset dan evaluasi
 
 Eksperimen dilakukan pada **lima dataset biomedical NER**. Model diuji menggunakan beberapa skenario few-shot, termasuk 5-shot dan 10-shot, serta beberapa ukuran retrieval pool.
 
 Model yang dievaluasi meliputi GPT-4, LLaMA 3-70B, dan GPT-OSS-120B. Metode retrieval yang dibandingkan mencakup TF-IDF dan pendekatan berbasis embedding.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Penelitian membandingkan dua strategi utama:
 
@@ -43,9 +43,9 @@ Pada dynamic prompting, annotated examples dari training set diindeks terlebih d
 
 ![Arsitektur dynamic prompting berbasis RAG](IMAGE/dynamic-rag-architecture.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada **Biomedical Named Entity Recognition**, yaitu mengenali entitas biomedis seperti:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada **Biomedical Named Entity Recognition**, yaitu mengenali entitas biomedis seperti:
 
 - penyakit;
 - obat dan adverse drug reaction;
@@ -53,7 +53,7 @@ Paper ini berfokus pada **Biomedical Named Entity Recognition**, yaitu mengenali
 - gejala;
 - konsep klinis lainnya.
 
-### Hasil Utama
+### Hasil utama
 
 Structured static prompting meningkatkan rata-rata F1-score sebesar:
 
@@ -73,7 +73,7 @@ Dynamic prompting dengan retrieval TF-IDF menghasilkan peningkatan rata-rata F1-
 
 Hasil ablation study menunjukkan bahwa performa yang kuat masih dapat dicapai dengan jumlah annotated examples yang relatif kecil.
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama penelitian ini adalah:
 
@@ -98,7 +98,7 @@ Kontribusi utama penelitian ini adalah:
 - Hasil pada domain biomedis belum tentu langsung berlaku pada domain umum.
 - Penggunaan model komersial seperti GPT-4 dapat meningkatkan biaya eksperimen.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 Structured dynamic prompting berbasis RAG meningkatkan few-shot Biomedical NER dengan mengambil contoh anotasi yang paling relevan terhadap input. Strategi ini menghasilkan peningkatan F1-score dibandingkan static prompting dan menunjukkan bahwa pemilihan konteks secara dinamis dapat mengurangi kebutuhan anotasi. Namun, kualitas retrieval, biaya pemanggilan LLM, dan ketergantungan pada domain biomedis tetap menjadi faktor yang perlu dipertimbangkan.
 

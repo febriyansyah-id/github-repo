@@ -1,26 +1,26 @@
 # Review Paper
 
-## aCat: Automatically Choosing Anchor Tokens in Prompt for Natural Language Understanding
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Zhanhong Ye, Leilei Kong, dan Haoliang Qi (**2026**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *aCat: Automatically Choosing Anchor Tokens in Prompt for Natural Language Understanding*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian pada **Neural Processing Letters**, Volume 58, Article 31, tahun 2026. Artikel tersedia secara open access.
 
 DOI: `10.1007/s11063-026-11837-2`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengatasi masalah pemilihan **anchor tokens** secara manual pada soft-hard prompt tuning. Pemilihan manual dapat bersifat subjektif dan menghasilkan prompt yang kurang optimal.
 
-### Dataset dan Evaluasi
+### Dataset dan evaluasi
 
 Eksperimen dilakukan menggunakan benchmark **SuperGLUE** untuk Natural Language Understanding. Dataset yang digunakan meliputi:
 
@@ -34,7 +34,7 @@ Eksperimen dilakukan menggunakan benchmark **SuperGLUE** untuk Natural Language 
 
 Model dibandingkan dengan fine-tuning, no-anchor, P-tuning, random selection, dan P-tuning V2. Evaluasi menggunakan accuracy, F1, atau exact match sesuai karakteristik tiap dataset.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Penulis mengusulkan **aCat**, yaitu metode yang secara otomatis memilih prompt token yang dipertahankan sebagai anchor token.
 
@@ -49,8 +49,6 @@ Komponen utama aCat adalah:
 
 Corrector dilatih menggunakan reinforcement learning. Pada setiap posisi token, agent memilih salah satu dari dua tindakan: mempertahankan token sebagai anchor atau menggantinya dengan pseudo token.
 
-### Proses Training
-
 aCat menggunakan training dua tahap secara iteratif:
 
 1. **Supervised learning**: parameter corrector dibekukan, kemudian prompt encoder dan language model dilatih.
@@ -58,9 +56,9 @@ aCat menggunakan training dua tahap secara iteratif:
 
 ![Algoritma training dua tahap aCat](IMAGE/two-stage-training.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada **Natural Language Understanding**, termasuk:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada **Natural Language Understanding**, termasuk:
 
 - question answering;
 - sentiment atau textual entailment classification;
@@ -68,7 +66,7 @@ Paper ini berfokus pada **Natural Language Understanding**, termasuk:
 - commonsense reasoning;
 - word-sense disambiguation.
 
-### Hasil Utama
+### Hasil utama
 
 Hasil eksperimen menunjukkan bahwa aCat meningkatkan performa dibandingkan P-tuning pada sebagian besar dataset SuperGLUE. Varian **aCat-single-agent** umumnya menghasilkan performa yang lebih stabil karena seluruh prompt token diproses oleh satu corrector dengan konteks yang konsisten.
 
@@ -78,7 +76,7 @@ Dibandingkan P-tuning V2, aCat memperoleh rata-rata accuracy yang lebih tinggi p
 
 ![Perbandingan aCat dengan P-tuning V2](IMAGE/comparison-p-tuning-v2.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama aCat adalah:
 
@@ -104,7 +102,7 @@ Kontribusi utama aCat adalah:
 - Performa sensitif terhadap hyperparameter dan desain prompt awal.
 - Eksperimen menggunakan BERT-base sehingga generalisasi ke LLM berukuran lebih besar masih perlu diuji.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 aCat mengotomatisasi pemilihan anchor token dalam soft-hard prompt tuning melalui corrector berbasis reinforcement learning. Pendekatan ini mempertahankan token yang bermakna secara semantik sebagai hard prompt dan mengganti token lainnya dengan pseudo-token yang dapat dilatih. Hasil pada benchmark SuperGLUE menunjukkan peningkatan dibandingkan baseline prompt tuning, dengan keterbatasan pada biaya reinforcement learning dan potensi bias dari kandidat token serta local optimum.
 

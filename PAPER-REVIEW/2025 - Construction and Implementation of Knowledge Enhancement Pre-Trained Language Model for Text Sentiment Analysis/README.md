@@ -1,26 +1,26 @@
 # Review Paper
 
-## Construction and Implementation of Knowledge Enhancement Pre-Trained Language Model for Text Sentiment Analysis
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Lan Cui (**2025**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Construction and Implementation of Knowledge Enhancement Pre-Trained Language Model for Text Sentiment Analysis*
 
-### Nama Jurnal
+#### Nama Jurnal
 
 Artikel penelitian pada **Systems and Soft Computing**, Volume 7, Article 200293, tahun 2025. Artikel tersedia secara open access.
 
 DOI: `10.1016/j.sasc.2025.200293`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengembangkan pretrained language model yang diperkuat dengan pengetahuan eksternal untuk meningkatkan pemahaman emosi pada teks panjang, ekspresi emosional kompleks, dan klasifikasi sentimen yang lebih rinci.
 
-### Dataset
+### Dataset dan evaluasi
 
 Penelitian menggunakan dataset teks bahasa Mandarin berskala besar untuk tahap pre-training dan evaluasi klasifikasi sentimen. Pengetahuan tambahan yang digunakan meliputi:
 
@@ -29,7 +29,7 @@ Penelitian menggunakan dataset teks bahasa Mandarin berskala besar untuk tahap p
 - pengetahuan spesifik domain;
 - informasi semantik yang berkaitan dengan kata atau ekspresi emosional.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 Model yang diusulkan menggabungkan pretrained language model dengan **knowledge enhancement module** dan sentiment classification head.
 
@@ -45,14 +45,14 @@ Tahapan utama model adalah:
 
 ![Konstruksi knowledge graph untuk model](IMAGE/graph-construction.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada dua tugas utama:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada dua tugas utama:
 
 - **Text sentiment classification**, yaitu menentukan kecenderungan sentimen seperti positif, negatif, atau netral.
 - **Fine-grained sentiment analysis**, yaitu menganalisis sentimen secara lebih rinci berdasarkan kategori atau tingkat emosi.
 
-### Hasil Utama
+### Hasil utama
 
 Dibandingkan dengan baseline, model memperoleh peningkatan sebagai berikut:
 
@@ -65,7 +65,7 @@ Model juga dilaporkan lebih robust ketika memproses teks panjang dan ekspresi em
 
 ![Perbandingan performa model](IMAGE/performance-comparison.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Knowledge enhancement module membantu model untuk:
 
@@ -92,7 +92,7 @@ Hasil ablation experiment menunjukkan kontribusi modul tambahan terhadap perform
 - Dataset dan domain yang lebih beragam masih diperlukan untuk menguji generalisasi model.
 - Dampak biaya komputasi akibat integrasi pengetahuan eksternal perlu dianalisis lebih lanjut.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 Model yang diusulkan mengintegrasikan pengetahuan emosi dan pengetahuan domain ke dalam pretrained language model untuk sentiment analysis. Knowledge enhancement module membantu model mengenali kosakata emosional dan memahami ekspresi sentimen yang kompleks. Peningkatan accuracy dan F1-score pada klasifikasi sentimen serta fine-grained sentiment analysis menunjukkan manfaat integrasi tersebut, tetapi generalisasi pada bahasa dan domain lain masih memerlukan validasi.
 

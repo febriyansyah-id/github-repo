@@ -1,26 +1,26 @@
 # Review Paper
 
-## GPT-NER: Named Entity Recognition via Large Language Models
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Shuhe Wang, Xiaofei Sun, Xiaoya Li, Rongbin Ouyang, Fei Wu, Tianwei Zhang, Jiwei Li, dan Guoyin Wang (**2025**).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *GPT-NER: Named Entity Recognition via Large Language Models*
 
-### Nama Jurnal / Conference
+#### Nama Jurnal / Conference
 
 Artikel penelitian pada **Findings of the Association for Computational Linguistics: NAACL 2025**, halaman 4257-4275. Paper tersedia secara open access.
 
 DOI: `10.18653/v1/2025.findings-naacl.239`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengatasi kesenjangan antara Named Entity Recognition yang secara alami merupakan sequence labeling dan Large Language Model yang bekerja sebagai text-generation model.
 
-### Dataset
+### Dataset dan evaluasi
 
 Eksperimen dilakukan pada beberapa dataset NER:
 
@@ -29,7 +29,7 @@ Eksperimen dilakukan pada beberapa dataset NER:
 
 Penelitian juga menguji skenario low-resource dan few-shot dengan jumlah contoh berlabel yang sangat terbatas.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 GPT-NER mengubah tugas sequence labeling menjadi tugas text generation. Entitas ditandai menggunakan token khusus `@@` dan `##`.
 
@@ -47,16 +47,16 @@ Tahapan utama metode adalah:
 
 ![Prompt self-verification untuk mengurangi hallucination](IMAGE/self-verification-prompt.png)
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada **Named Entity Recognition**, termasuk:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada **Named Entity Recognition**, termasuk:
 
 - flat NER, ketika entitas tidak saling bertumpuk;
 - nested NER, ketika suatu entitas dapat berada di dalam entitas lain;
 - low-resource NER;
 - few-shot NER.
 
-### Hasil Utama
+### Hasil utama
 
 GPT-NER memperoleh performa yang sebanding dengan supervised baseline pada kondisi full-data. Pada kondisi low-resource dan few-shot, GPT-NER menunjukkan keunggulan yang lebih kuat dibandingkan model supervised karena mampu memanfaatkan pengetahuan dan kemampuan in-context learning LLM.
 
@@ -66,7 +66,7 @@ Eksperimen tambahan menunjukkan bahwa performa GPT-NER berubah sesuai jumlah dem
 
 ![Hasil eksperimen berdasarkan jumlah demonstrasi few-shot](IMAGE/k-shot-results.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama GPT-NER adalah:
 
@@ -91,7 +91,7 @@ Kontribusi utama GPT-NER adalah:
 - LLM masih dapat mengalami hallucination atau menandai non-entity sebagai entitas.
 - Pemrosesan setiap tipe entitas secara terpisah dapat meningkatkan jumlah pemanggilan model.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 GPT-NER menjembatani sequence labeling dan text generation dengan mengubah NER menjadi tugas penandaan entitas menggunakan token khusus. Self-verification membantu mengurangi over-prediction dan hallucination pada keluaran LLM. Hasil eksperimen menunjukkan keunggulan metode terutama pada kondisi low-resource dan few-shot, sementara biaya inferensi, ketergantungan pada prompt, dan kebutuhan pemrosesan setiap tipe entitas menjadi pertimbangan implementasi.
 

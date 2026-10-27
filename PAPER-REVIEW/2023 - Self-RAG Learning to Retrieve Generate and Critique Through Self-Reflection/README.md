@@ -1,26 +1,26 @@
 # Review Paper
 
-## Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection
+### Identitas paper
 
-### Penulis & Tahun
+#### Penulis & Tahun
 
 Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, dan Hannaneh Hajishirzi (**2023**; diterbitkan pada ICLR 2024).
 
-### Judul Penelitian
+#### Judul Penelitian
 
 *Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection*
 
-### Nama Conference
+#### Nama Conference
 
 Paper ini dipublikasikan sebagai paper conference pada **International Conference on Learning Representations (ICLR 2024)**. Versi awal tersedia sebagai preprint arXiv pada tahun 2023.
 
 DOI/ID: `arXiv:2310.11511`.
 
-### Tujuan Penelitian
+### Tujuan penelitian
 
 Penelitian ini mengatasi dua masalah pada RAG konvensional: sistem selalu melakukan retrieval meskipun informasi tambahan tidak diperlukan, dan LLM tidak selalu mampu menilai apakah dokumen hasil retrieval mendukung jawabannya.
 
-### Dataset dan Evaluasi
+### Dataset dan evaluasi
 
 SELF-RAG dievaluasi pada beberapa tugas knowledge-intensive NLP, termasuk:
 
@@ -32,7 +32,7 @@ SELF-RAG dievaluasi pada beberapa tugas knowledge-intensive NLP, termasuk:
 
 Eksperimen dilakukan menggunakan model SELF-RAG berukuran 7B dan 13B serta dibandingkan dengan LLM dan sistem RAG lainnya.
 
-### Metode / Model
+### Metode atau arsitektur model
 
 SELF-RAG melatih satu language model agar dapat melakukan retrieval, generation, dan self-critique secara adaptif.
 
@@ -55,17 +55,15 @@ Alur inference SELF-RAG adalah:
 5. Reflection tokens digunakan untuk mengkritik dukungan fakta dan kegunaan jawaban.
 6. Kandidat terbaik dipilih berdasarkan sinyal refleksi dan kebutuhan tugas.
 
-### Proses Training
-
 Data training SELF-RAG diperkaya dengan reflection tokens. Model dilatih untuk memprediksi keluaran tugas sekaligus token retrieval dan critique.
 
 ![Contoh data training SELF-RAG](IMAGE/training-examples.png)
 
 Pada proses training, passage hasil retrieval tidak dihitung sebagai target prediksi utama. Model diarahkan untuk mempelajari kapan harus melakukan retrieval, bagaimana menilai evidence, dan bagaimana menghasilkan jawaban yang didukung sumber.
 
-### Tugas NLP
+### Domain penelitian
 
-Paper ini berfokus pada:
+Domain penelitian ini adalah **Natural Language Processing (NLP)**. Paper ini berfokus pada:
 
 - Retrieval-Augmented Generation;
 - open-domain Question Answering;
@@ -74,7 +72,7 @@ Paper ini berfokus pada:
 - long-form text generation;
 - citation-aware generation.
 
-### Hasil Utama
+### Hasil utama
 
 SELF-RAG 7B dan 13B dilaporkan mengungguli berbagai baseline pada open-domain QA, reasoning, dan fact verification. Model juga meningkatkan factuality serta citation accuracy pada long-form generation dibandingkan LLM dan sistem RAG pembanding.
 
@@ -84,7 +82,7 @@ Keunggulan utama SELF-RAG berasal dari kemampuan retrieval on-demand dan reflect
 
 ![Analisis skala training dan performa](IMAGE/training-scale-analysis.png)
 
-### Analisis Kontribusi Model
+### Analisis kontribusi model
 
 Kontribusi utama SELF-RAG adalah:
 
@@ -109,7 +107,7 @@ Kontribusi utama SELF-RAG adalah:
 - Reflection tokens dapat menambah kompleksitas decoding dan inference.
 - Biaya training dan penyimpanan model tetap besar untuk model berukuran 7B atau 13B.
 
-### Kesimpulan Review
+### Kesimpulan review
 
 SELF-RAG mengembangkan RAG adaptif dengan melatih language model untuk menentukan kapan retrieval diperlukan, menilai relevansi evidence, dan mengkritik keluaran yang dihasilkan. Reflection tokens berfungsi sebagai mekanisme kontrol yang menghubungkan retrieval, factuality assessment, dan generation dalam satu proses inference.
 
