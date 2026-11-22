@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Paper Review Hub | 61 Research Papers (2023-2026) | Febriyansyah (MTI)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background-color: #0b0f19; color: #e2e8f0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .glass-card { background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(56, 189, 248, 0.2); backdrop-filter: blur(12px); border-radius: 12px; }
+    .glass-card-hover:hover { border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.15); }
+    .metric-badge { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md px-6 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-xl">📖</div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-lg font-bold tracking-tight text-white">ACADEMIC PAPER REVIEW HUB</h1>
+          <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">● 61 PAPERS (2023–2026)</span>
+        </div>
+        <p class="text-xs text-slate-400">Postgraduate Literature Reviews • Vision Transformer, Vision Mamba, Malware Vision & NLP</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-3">
+      <span class="text-xs text-slate-400 hidden sm:inline">Author: <strong class="text-slate-200">Febriyansyah (MTI Scholar)</strong></span>
+      <a href="https://github.com/febriyansyah-id/PAPER-REVIEW" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-1.5">
+        <span>GitHub Repo</span>
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Filter & Search Bar -->
+  <div class="bg-slate-900/60 border-b border-slate-800 px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-2" id="categoryFilters">
+      <button onclick="setCategory('all')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-900" data-cat="all">All Categories (61)</button>
+      <button onclick="setCategory('vit')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="vit">ViT Malware (9)</button>
+      <button onclick="setCategory('vim')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="vim">Vision Mamba (7)</button>
+      <button onclick="setCategory('hybrid')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="hybrid">ViT & ViM Hybrid (2)</button>
+      <button onclick="setCategory('malware-vision')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="malware-vision">Malware Vision (21)</button>
+      <button onclick="setCategory('nlp')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="nlp">NLP & LLMs (11)</button>
+      <button onclick="setCategory('non-vision')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="non-vision">Non-Vision Detection (3)</button>
+      <button onclick="setCategory('survey')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white" data-cat="survey">Surveys & XAI (8)</button>
+    </div>
+    <div class="flex items-center space-x-2 w-full sm:w-auto">
+      <select id="yearSelect" onchange="setYear(this.value)" class="bg-slate-800 border border-slate-700 text-xs rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-cyan-400">
+        <option value="all">All Years (2023-2026)</option>
+        <option value="2026">2026 (10 papers)</option>
+        <option value="2025">2025 (21 papers)</option>
+        <option value="2024">2024 (22 papers)</option>
+        <option value="2023">2023 (8 papers)</option>
+      </select>
+      <div class="relative w-full sm:w-60">
+        <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Search title, keyword, model..." class="w-full bg-slate-800/80 border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-400">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Body -->
+  <main class="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
+
+    <!-- Metrics Row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass-card p-4">
+        <span class="text-xs text-slate-400">TOTAL LITERATURE REVIEWS</span>
+        <div class="text-2xl font-bold text-white mt-1">61 Papers</div>
+        <p class="text-xs text-cyan-400 mt-2 font-mono">100% Peer-Reviewed & Indexed</p>
+      </div>
+      <div class="glass-card p-4">
+        <span class="text-xs text-slate-400">RESEARCH TIMELINE</span>
+        <div class="text-2xl font-bold text-emerald-400 mt-1">2023 – 2026</div>
+        <p class="text-xs text-slate-400 mt-2">Continuous 4-year state of the art</p>
+      </div>
+      <div class="glass-card p-4">
+        <span class="text-xs text-slate-400">PRIMARY RESEARCH DOMAINS</span>
+        <div class="text-2xl font-bold text-purple-400 mt-1">7 Categories</div>
+        <p class="text-xs text-slate-400 mt-2">ViT, Mamba, Vision CNN, NLP, XAI</p>
+      </div>
+      <div class="glass-card p-4">
+        <span class="text-xs text-slate-400">ACADEMIC SCHOLAR</span>
+        <div class="text-2xl font-bold text-teal-400 mt-1">Febriyansyah</div>
+        <p class="text-xs text-slate-400 mt-2">Magister Teknik Informatika (MTI)</p>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card p-5 flex flex-col items-center">
+        <div class="w-full flex justify-between items-center mb-3">
+          <h2 class="text-sm font-semibold text-white">Distribution by Research Domain</h2>
+          <span class="text-xs text-cyan-400 font-mono">7 Sub-fields</span>
+        </div>
+        <div class="w-full h-56 flex items-center justify-center">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+      <div class="glass-card p-5 flex flex-col items-center">
+        <div class="w-full flex justify-between items-center mb-3">
+          <h2 class="text-sm font-semibold text-white">Publication Timeline Evolution</h2>
+          <span class="text-xs text-emerald-400 font-mono">2023 – 2026</span>
+        </div>
+        <div class="w-full h-56 flex items-center justify-center">
+          <canvas id="timelineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Results Counter -->
+    <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+      <div>
+        Showing <span id="visibleCount" class="font-bold text-cyan-400 font-mono">61</span> of <span class="font-mono">61</span> papers
+      </div>
+      <div id="filterSummary" class="text-slate-500">
+        Filter: All Categories | All Years
+      </div>
+    </div>
+
+    <!-- Papers Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="papersGrid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-900/60 py-4 px-6 text-center text-xs text-slate-500">
+    Curated & Maintained by <strong class="text-slate-300">Febriyansyah</strong> • Magister Teknik Informatika (MTI) Research Archive
+  </footer>
+
+  <script>
+    const papersData = [{"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2023", "title": "Enhancing Malware Classification with Vision Transformers: A Comparative Study with Traditional CNN Models", "link": "2023%20-%20Enhancing%20Malware%20Classification%20with%20Vision%20Transformers%20A%20Comparative%20Study%20with%20Traditional%20CNN%20Models/README.md", "focus": "ViT, CNN, Malimg malware images"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2023", "title": "ViT4Mal: Lightweight Vision Transformer for Malware Detection on Edge Devices", "link": "2023%20-%20ViT4Mal%20Lightweight%20Vision%20Transformer%20for%20Malware%20Detection%20on%20Edge%20Devices/README.md", "focus": "Lightweight ViT, malware images, IoT/FPGA"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2024", "title": "Accelerating Malware Classification: A Vision Transformer Solution", "link": "2024%20-%20Accelerating%20Malware%20Classification%20A%20Vision%20Transformer%20Solution/README.md", "focus": "LeViT-MC, MaleVis RGB, CNNâ€“ViT dua tahap"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2024", "title": "Convolutional-free Malware Image Classification using Self-attention Mechanisms", "link": "2024%20-%20Convolutional-free%20Malware%20Image%20Classification%20using%20Self-attention%20Mechanisms/README.md", "focus": "RGB malware images, GAN oversampling, Vision Transformer self-attention"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2024", "title": "Data-Efficient Image Transformers for Robust Malware Family Classification", "link": "2024%20-%20Data-Efficient%20Image%20Transformers%20for%20Robust%20Malware%20Family%20Classification/README.md", "focus": "DeiT, HGBO, citra RGB MaleVis dan MalNet-Image Tiny"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2024", "title": "Vision Based Malware Classification Using Deep Neural Network with Hybrid Data Augmentation", "link": "2024%20-%20Vision%20Based%20Malware%20Classification%20Using%20Deep%20Neural%20Network%20with%20Hybrid%20Data%20Augmentation/README.md", "focus": "Malimg, Vision Transformer, DCGAN and hybrid augmentation"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2025", "title": "Image-Based Malware Multiclass Classification Using Vision Transformer Architecture", "link": "2025%20-%20Image-Based%20Malware%20Multiclass%20Classification%20Using%20Vision%20Transformer%20Architecture/README.md", "focus": "ViT, Malimg, klasifikasi malware multikelas"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2025", "title": "MalFormer: A Novel Vision Transformer Model for Robust Malware Analysis", "link": "2025%20-%20MalFormer%20A%20Novel%20Vision%20Transformer%20Model%20for%20Robust%20Malware%20Analysis/README.md", "focus": "Malware ViT, multiscale attention, robustness to obfuscation"}, {"category": "Vision Transformer (ViT) untuk Klasifikasi Malware", "year": "2026", "title": "MSA-ViT: A Multi-Scale Vision Transformer for Robust Malware Image Classification", "link": "2026%20-%20MSA-ViT%20A%20Multi-Scale%20Vision%20Transformer%20for%20Robust%20Malware%20Image%20Classification/README.md", "focus": "Multi-scale ViT, MaleVis, robustness"}, {"category": "Vision Mamba (ViM)", "year": "2024", "title": "A Survey on Visual Mamba", "link": "2024%20-%20A%20Survey%20on%20Visual%20Mamba/README.md", "focus": "Survey, visual SSM taxonomy and applications"}, {"category": "Vision Mamba (ViM)", "year": "2024", "title": "GroupMamba: Efficient Group-Based Visual State Space Model", "link": "2024%20-%20GroupMamba%20Efficient%20Group-Based%20Visual%20State%20Space%20Model/README.md", "focus": "Group SSM, multi-direction scan, ImageNet/COCO/ADE20K"}, {"category": "Vision Mamba (ViM)", "year": "2024", "title": "Malware Image Classification Based on Mamba", "link": "2024%20-%20Malware%20Image%20Classification%20Based%20on%20Mamba/README.md", "focus": "Mamba, state-space model, MalImg"}, {"category": "Vision Mamba (ViM)", "year": "2024", "title": "Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model", "link": "2024%20-%20Vision%20Mamba%20Efficient%20Visual%20Representation%20Learning%20with%20Bidirectional%20State%20Space%20Model/README.md", "focus": "Bidirectional SSM, visual backbone, ImageNet/COCO/ADE20K"}, {"category": "Vision Mamba (ViM)", "year": "2024", "title": "VSSD: Vision Mamba with Non-Causal State Space Duality", "link": "2024%20-%20VSSD%20Vision%20Mamba%20With%20Non-Causal%20State%20Space%20Duality/README.md", "focus": "Non-causal SSD, visual SSM, ImageNet/COCO/ADE20K"}, {"category": "Vision Mamba (ViM)", "year": "2025", "title": "DefMamba: Deformable Visual State Space Model", "link": "2025%20-%20DefMamba%20Deformable%20Visual%20State%20Space%20Model/README.md", "focus": "Deformable SSM scanning, ImageNet/COCO/ADE20K"}, {"category": "Vision Mamba (ViM)", "year": "2025", "title": "Mamba-Adaptor: State Space Model Adaptor for Visual Recognition", "link": "2025%20-%20Mamba-Adaptor%20State%20Space%20Model%20Adaptor%20for%20Visual%20Recognition/README.md", "focus": "SSM adaptor, transfer learning, ImageNet/COCO"}, {"category": "Paper yang Membahas ViT dan ViM", "year": "2024", "title": "MambaOut: Do We Really Need Mamba for Vision?", "link": "2024%20-%20MambaOut%20Do%20We%20Really%20Need%20Mamba%20for%20Vision/README.md", "focus": "SSM ablation, Gated CNN, ImageNet/COCO/ADE20K"}, {"category": "Paper yang Membahas ViT dan ViM", "year": "2024", "title": "MambaVision: A Hybrid Mamba-Transformer Vision Backbone", "link": "2024%20-%20MambaVision%20A%20Hybrid%20Mamba-Transformer%20Vision%20Backbone/README.md", "focus": "Hybrid CNN-Mamba-Transformer, ImageNet/COCO/ADE20K"}, {"category": "Natural Language Processing (NLP)", "year": "2023", "title": "QLoRA Efficient Finetuning of Quantized LLMs", "link": "2023%20-%20QLoRA%20Efficient%20Finetuning%20of%20Quantized%20LLMs/README.md", "focus": "Quantization, LoRA, PEFT"}, {"category": "Natural Language Processing (NLP)", "year": "2023", "title": "Self-RAG Learning to Retrieve Generate and Critique Through Self-Reflection", "link": "2023%20-%20Self-RAG%20Learning%20to%20Retrieve%20Generate%20and%20Critique%20Through%20Self-Reflection/README.md", "focus": "Adaptive RAG, self-reflection"}, {"category": "Natural Language Processing (NLP)", "year": "2024", "title": "Direct Preference Optimization DPO", "link": "2024%20-%20Direct%20Preference%20Optimization%20DPO/README.md", "focus": "LLM alignment, preference optimization"}, {"category": "Natural Language Processing (NLP)", "year": "2024", "title": "REAR A Relevance-Aware Retrieval-Augmented Framework for Open-Domain Question Answering", "link": "2024%20-%20REAR%20A%20Relevance-Aware%20Retrieval-Augmented%20Framework%20for%20Open-Domain%20Question%20Answering/README.md", "focus": "RAG, relevance assessment, QA"}, {"category": "Natural Language Processing (NLP)", "year": "2025", "title": "Advancing Few-Shot Named Entity Recognition with Large Language Model", "link": "2025%20-%20Advancing%20Few-Shot%20Named%20Entity%20Recognition%20with%20Large%20Language%20Model/README.md", "focus": "Few-shot NER, metric learning, LLM"}, {"category": "Natural Language Processing (NLP)", "year": "2025", "title": "Construction and Implementation of Knowledge Enhancement Pre-Trained Language Model for Text Sentiment Analysis", "link": "2025%20-%20Construction%20and%20Implementation%20of%20Knowledge%20Enhancement%20Pre-Trained%20Language%20Model%20for%20Text%20Sentiment%20Analysis/README.md", "focus": "Sentiment analysis, knowledge enhancement"}, {"category": "Natural Language Processing (NLP)", "year": "2025", "title": "GPT-NER Named Entity Recognition via Large Language Models", "link": "2025%20-%20GPT-NER%20Named%20Entity%20Recognition%20via%20Large%20Language%20Models/README.md", "focus": "NER, text generation, self-verification"}, {"category": "Natural Language Processing (NLP)", "year": "2026", "title": "aCat Automatically Choosing Anchor Tokens in Prompt for Natural Language Understanding", "link": "2026%20-%20aCat%20Automatically%20Choosing%20Anchor%20Tokens%20in%20Prompt%20for%20Natural%20Language%20Understanding/README.md", "focus": "Prompt tuning, reinforcement learning"}, {"category": "Natural Language Processing (NLP)", "year": "2026", "title": "Enriching the Low-Resource Neural Machine Translation with Large Language Model", "link": "2026%20-%20Enriching%20the%20Low-Resource%20Neural%20Machine%20Translation%20with%20Large%20Language%20Model/README.md", "focus": "Machine translation, knowledge distillation"}, {"category": "Natural Language Processing (NLP)", "year": "2026", "title": "Improving Few-Shot Named Entity Recognition for Large Language Models Using Structured Dynamic Prompting with Retrieval Augmented Generation", "link": "2026%20-%20Improving%20Few-Shot%20Named%20Entity%20Recognition%20for%20Large%20Language%20Models%20Using%20Structured%20Dynamic%20Prompting%20with%20Retrieval%20Augmented%20Generation/README.md", "focus": "Biomedical NER, dynamic prompting, RAG"}, {"category": "Natural Language Processing (NLP)", "year": "2026", "title": "Training-Free Layer Selection for Partial Fine-Tuning of Language Models", "link": "2026%20-%20Training-Free%20Layer%20Selection%20for%20Partial%20Fine-Tuning%20of%20Language%20Models/README.md", "focus": "Partial fine-tuning, layer selection"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2023", "title": "CNN vs Transformer Variants - Malware Classification Using Binary Malware Images", "link": "2023%20-%20CNN%20vs%20Transformer%20Variants%20-%20Malware%20Classification%20Using%20Binary%20Malware%20Images/README.md", "focus": "CNN, Transformer, binary malware image"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2023", "title": "Image-Based Malware Detection Using Î±-Cuts and Binary Visualisation", "link": "2023%20-%20Image-Based%20Malware%20Detection%20Using%20Alpha-Cuts%20and%20Binary%20Visualisation/README.md", "focus": "Î±-cut, binary visualization, ResNet50"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2023", "title": "Malware Detection Using Image Representation of Malware Data and Transfer Learning", "link": "2023%20-%20Malware%20Detection%20Using%20Image%20Representation%20of%20Malware%20Data%20and%20Transfer%20Learning/README.md", "focus": "Malimg, VGG16/ResNet-50, stacked ML"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "A Comparative Performance Analysis of Malware Detection Algorithms Based on Various Texture Features and Classifiers", "link": "2024%20-%20A%20Comparative%20Performance%20Analysis%20of%20Malware%20Detection%20Algorithms%20Based%20on%20Various%20Texture%20Features%20and%20Classifiers/README.md", "focus": "Malimg/MaleVis, texture descriptors, classical classifiers"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "Android Malware Detection Based on RGB Images and Multi-feature Fusion", "link": "2024%20-%20Android%20Malware%20Detection%20Based%20on%20RGB%20Images%20and%20Multi-feature%20Fusion/README.md", "focus": "Fusi DEX, manifest, API menjadi citra RGB"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "Deep Learning Applied to Imbalanced Malware Datasets Classification", "link": "2024%20-%20Deep%20Learning%20Applied%20to%20Imbalanced%20Malware%20Datasets%20Classification/README.md", "focus": "MobileNet FT, class imbalance, Malimg/MaleVis/Fusion"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "Deep Multi-Task Learning for Malware Image Classification", "link": "2024%20-%20Deep%20Multi-Task%20Learning%20for%20Malware%20Image%20Classification/README.md", "focus": "Multi-task learning, citra malware lintas format"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "Efficient and Generalized Image-Based CNN Algorithm for Multi-Class Malware Detection", "link": "2024%20-%20Efficient%20and%20Generalized%20Image-Based%20CNN%20Algorithm%20for%20Multi-Class%20Malware%20Detection/README.md", "focus": "CNN, multiclass malware detection"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2024", "title": "Enhanced Image-Based Malware Classification Using Transformer-Based Convolutional Neural Networks", "link": "2024%20-%20Enhanced%20Image-Based%20Malware%20Classification%20Using%20Transformer-Based%20Convolutional%20Neural%20Networks/README.md", "focus": "CNN-Transformer, malware images"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "An Efficient Malware Detection Method Using a Hybrid ResNet-Transformer Network and IGOA-Based Wrapper Feature Selection", "link": "2025%20-%20An%20Efficient%20Malware%20Detection%20Method%20Using%20a%20Hybrid%20ResNet-Transformer%20Network%20and%20IGOA-Based%20Wrapper%20Feature%20Selection/README.md", "focus": "ResNet, Transformer, feature selection"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "An Explainable Hybrid CNN-Transformer Architecture for Malware Image Classification", "link": "2025%20-%20An%20Explainable%20Hybrid%20CNN-Transformer%20Architecture%20for%20Malware%20Image%20Classification/README.md", "focus": "Explainable AI, CNN-Transformer"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "CNN-AutoMIC Combining Convolutional Neural Network and Autoencoder to Learn Non-Linear Features for KNN-Based Malware Image Classification", "link": "2025%20-%20CNN-AutoMIC%20Combining%20Convolutional%20Neural%20Network%20and%20Autoencoder%20to%20Learn%20Non-Linear%20Features%20for%20KNN-Based%20Malware%20Image%20Classification/README.md", "focus": "CNN, autoencoder, KNN"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "Enhancing Malware Detection via RGB Assembly Visualization and Hybrid Deep Learning Models", "link": "2025%20-%20Enhancing%20Malware%20Detection%20via%20RGB%20Assembly%20Visualization%20and%20Hybrid%20Deep%20Learning%20Models/README.md", "focus": "RGB visualization, EfficientNet, DenseNet"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "Multimodal Malware Classification Using Proposed Ensemble Deep Neural Network Framework", "link": "2025%20-%20Multimodal%20Malware%20Classification%20Using%20Proposed%20Ensemble%20Deep%20Neural%20Network%20Framework/README.md", "focus": "CNN-LSTM, late fusion, citra malware dan fitur numerik"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "Semantic Lossless Encoded Image Representation for Malware Classification", "link": "2025%20-%20Semantic%20Lossless%20Encoded%20Image%20Representation%20for%20Malware%20Classification/README.md", "focus": "Encoding bytecode lossless, CNN-SPP, row-patch Transformer"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2025", "title": "Through the Static: Demystifying Malware Visualization via Explainability", "link": "2025%20-%20Through%20the%20Static%20Demystifying%20Malware%20Visualization%20via%20Explainability/README.md", "focus": "Replicability, GradCAM/HiResCAM, masking untuk ViT"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2026", "title": "AD-CapsFPN An Asymmetric Dilated Convolutional Capsule Network with Feature Pyramid for Malware Classification", "link": "2026%20-%20AD-CapsFPN%20An%20Asymmetric%20Dilated%20Convolutional%20Capsule%20Network%20with%20Feature%20Pyramid%20for%20Malware%20Classification/README.md", "focus": "Capsule network, feature pyramid"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2026", "title": "Cybersecurity Oriented Malware Classification Using ParaECA-LSTMNet with a Hybrid Attention Guided CNN-LSTM Framework", "link": "2026%20-%20Cybersecurity%20Oriented%20Malware%20Classification%20Using%20ParaECA-LSTMNet%20with%20a%20Hybrid%20Attention%20Guided%20CNN-LSTM%20Framework/README.md", "focus": "Malimg grayscale, CNN-ECA-LSTM, klasifikasi keluarga"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2026", "title": "Image-Based Malware Classification Using DCGAN-Augmented Data and a CNN-Transformer Hybrid Model", "link": "2026%20-%20Image-Based%20Malware%20Classification%20Using%20DCGAN-Augmented%20Data%20and%20a%20CNN-Transformer%20Hybrid%20Model/README.md", "focus": "DCGAN, data augmentation, CNN-Transformer"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2026", "title": "MCPDS Image-Based Malware Classification Method Using Dual-Information Encoding and Pooling Depthwise Separable CNN", "link": "2026%20-%20MCPDS%20Image-Based%20Malware%20Classification%20Method%20Using%20Dual-Information%20Encoding%20and%20Pooling%20Depthwise%20Separable%20CNN/README.md", "focus": "PE metadata, depthwise separable CNN"}, {"category": "Klasifikasi Malware Berbasis Citra", "year": "2026", "title": "X-MET: Multimodal Entropyâ€“Visual Deep Learning Technique for Strengthening Cyber Governance and Resilient Digital Infrastructure", "link": "2026%20-%20X-MET%20Multimodal%20Entropy-Visual%20Deep%20Learning%20Technique%20for%20Strengthening%20Cyber%20Governance%20and%20Resilient%20Digital%20Infrastructure/README.md", "focus": "Byteplot grayscale, entropy, fusi multimodal lintas format"}, {"category": "Deteksi Malware di Luar Klasifikasi Citra", "year": "2023", "title": "Machine Learning Based Fileless Malware Traffic Classification Using Image Visualization", "link": "2023%20-%20Machine%20Learning%20Based%20Fileless%20Malware%20Traffic%20Classification%20Using%20Image%20Visualization/README.md", "focus": "Cobalt Strike, visualisasi payload jaringan, CNN"}, {"category": "Deteksi Malware di Luar Klasifikasi Citra", "year": "2024", "title": "Malware Analysis Using Transformer Based Models: An Empirical Study", "link": "2024%20-%20Malware%20Analysis%20Using%20Transformer%20Based%20Models%20An%20Empirical%20Study/README.md", "focus": "Studi CNN, CNNâ€“Transformer, dan ViT pada Android/IoT"}, {"category": "Deteksi Malware di Luar Klasifikasi Citra", "year": "2025", "title": "OPTISTACK: A Hybrid Ensemble Learning and XAI-Based Approach for Malware Detection in Compressed Files", "link": "2025%20-%20OPTISTACK%20A%20Hybrid%20Ensemble%20Learning%20and%20XAI-Based%20Approach%20for%20Malware%20Detection%20in%20Compressed%20Files/README.md", "focus": "Entropy, stacking ensemble, XAI, compressed files"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2024", "title": "A Comprehensive Analysis of Explainable AI for Malware Hunting", "link": "2024%20-%20A%20Comprehensive%20Analysis%20of%20Explainable%20AI%20for%20Malware%20Hunting/README.md", "focus": "XAI, explainable malware detection, SHAP/LIME/Grad-CAM"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2024", "title": "SoK: Visualization-Based Malware Detection Techniques", "link": "2024%20-%20SoK%20Visualization-Based%20Malware%20Detection%20Techniques/README.md", "focus": "SoK, malware visualization taxonomy and research challenges"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "A Survey on ML Techniques for Multi-Platform Malware Detection: Securing PC, Mobile Devices, IoT, and Cloud Environments", "link": "2025%20-%20A%20Survey%20on%20ML%20Techniques%20for%20Multi-Platform%20Malware%20Detection/README.md", "focus": "Multi-platform malware, ML/DL, dataset and feature survey"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "Application of Deep Learning in Malware Detection: A Review", "link": "2025%20-%20Application%20of%20Deep%20Learning%20in%20Malware%20Detection%20A%20Review/README.md", "focus": "Tinjauan sistematis, citra malware, sekuens, augmentasi"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "Deep Learning Approaches for Malware Detection: A Comprehensive Review of Techniques, Challenges, and Future Directions", "link": "2025%20-%20Deep%20Learning%20Approaches%20for%20Malware%20Detection%20A%20Comprehensive%20Review%20of%20Techniques%20Challenges%20and%20Future%20Directions/README.md", "focus": "CNN/RNN/hybrid, tinjauan deteksi malware"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "Explainable Artificial Intelligence (XAI) for Malware Analysis: A Survey of Techniques, Applications, and Open Challenges", "link": "2025%20-%20Explainable%20Artificial%20Intelligence%20XAI%20for%20Malware%20Analysis%20A%20Survey%20of%20Techniques%20Applications%20and%20Open%20Challenges/README.md", "focus": "XAI, SHAP/LIME/Grad-CAM, interpretabilitas malware"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "MalScore: A Quality Assessment Framework for Visual Malware Datasets Using No-Reference Image Quality Metrics", "link": "2025%20-%20MalScore%20A%20Quality%20Assessment%20Framework%20for%20Visual%20Malware%20Datasets%20Using%20No-Reference%20Image%20Quality%20Metrics/README.md", "focus": "NR-IQA, penilaian dataset malware visual, MaleVis"}, {"category": "Survei, Explainability, dan Kualitas Dataset", "year": "2025", "title": "Systematic Review: Malware Detection and Classification in Cybersecurity", "link": "2025%20-%20Systematic%20Review%20Malware%20Detection%20and%20Classification%20in%20Cybersecurity/README.md", "focus": "SLR, PRISMA, malware detection methods and datasets"}];
+
+    function getCatCode(catName) {
+      if (catName.includes("Vision Transformer (ViT) untuk Klasifikasi Malware")) return "vit";
+      if (catName === "Vision Mamba (ViM)") return "vim";
+      if (catName.includes("ViT dan ViM")) return "hybrid";
+      if (catName.includes("Natural Language Processing")) return "nlp";
+      if (catName.includes("Klasifikasi Malware Berbasis Citra")) return "malware-vision";
+      if (catName.includes("Deteksi Malware di Luar Klasifikasi Citra")) return "non-vision";
+      if (catName.includes("Survei")) return "survey";
+      return "other";
+    }
+
+    function getCatBadge(catCode) {
+      switch(catCode) {
+        case 'vit': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-sky-500/10 text-sky-400 border border-sky-500/30">ViT Malware</span>';
+        case 'vim': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-teal-500/10 text-teal-400 border border-teal-500/30">Vision Mamba</span>';
+        case 'hybrid': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">ViT & Mamba</span>';
+        case 'malware-vision': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">Malware Vision</span>';
+        case 'nlp': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">NLP & LLM</span>';
+        case 'non-vision': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">Non-Vision</span>';
+        case 'survey': return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">Survey & XAI</span>';
+        default: return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-500/10 text-slate-400 border border-slate-500/30">General</span>';
+      }
+    }
+
+    let currentCategory = 'all';
+    let currentYear = 'all';
+    let searchQuery = '';
+
+    function renderPapers() {
+      const container = document.getElementById('papersGrid');
+      container.innerHTML = '';
+      let visible = 0;
+
+      papersData.forEach(p => {
+        const catCode = getCatCode(p.category);
+        const matchesCat = (currentCategory === 'all' || catCode === currentCategory);
+        const matchesYear = (currentYear === 'all' || p.year === currentYear);
+        const textToSearch = (p.title + ' ' + p.focus + ' ' + p.year + ' ' + p.category).toLowerCase();
+        const matchesSearch = (!searchQuery || textToSearch.includes(searchQuery));
+
+        if (matchesCat && matchesYear && matchesSearch) {
+          visible++;
+          const card = document.createElement('div');
+          card.className = 'glass-card glass-card-hover p-4 flex flex-col justify-between';
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-slate-800 text-slate-300 border border-slate-700">${p.year}</span>
+                ${getCatBadge(catCode)}
+              </div>
+              <h3 class="text-sm font-bold text-white leading-snug line-clamp-2 hover:text-cyan-400 transition">
+                <a href="${p.link}">${p.title}</a>
+              </h3>
+              <p class="text-xs text-slate-400 mt-2.5 leading-relaxed">
+                <strong class="text-slate-300">Fokus:</strong> ${p.focus}
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-[11px] text-slate-500 truncate max-w-[160px]">${p.category}</span>
+              <a href="${p.link}" class="px-2.5 py-1 rounded bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-semibold transition flex items-center space-x-1">
+                <span>Read Review</span>
+                <span>📄</span>
+              </a>
+            </div>
+          `;
+          container.appendChild(card);
+        }
+      });
+
+      document.getElementById('visibleCount').innerText = visible;
+      document.getElementById('filterSummary').innerText = `Filter: Category: ${currentCategory.toUpperCase()} | Year: ${currentYear.toUpperCase()}`;
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        if (b.getAttribute('data-cat') === cat) {
+          b.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-900';
+        } else {
+          b.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:text-white';
+        }
+      });
+      renderPapers();
+    }
+
+    function setYear(yr) {
+      currentYear = yr;
+      renderPapers();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderPapers();
+    }
+
+    // Chart.js Category Doughnut
+    const catCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(catCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Malware Vision (21)', 'NLP & LLMs (11)', 'ViT Malware (9)', 'Surveys & XAI (8)', 'Vision Mamba (7)', 'Non-Vision (3)', 'ViT-ViM Hybrid (2)'],
+        datasets: [{
+          data: [21, 11, 9, 8, 7, 3, 2],
+          backgroundColor: ['#3b82f6', '#10b981', '#0ea5e9', '#a855f7', '#14b8a6', '#f59e0b', '#6366f1'],
+          borderWidth: 1,
+          borderColor: '#0f172a'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 10 }, boxWidth: 10 } }
+        }
+      }
+    });
+
+    // Chart.js Timeline Bar
+    const timeCtx = document.getElementById('timelineChart').getContext('2d');
+    new Chart(timeCtx, {
+      type: 'bar',
+      data: {
+        labels: ['2023', '2024', '2025', '2026'],
+        datasets: [{
+          label: 'Number of Papers',
+          data: [8, 22, 21, 10],
+          backgroundColor: ['#64748b', '#0ea5e9', '#10b981', '#a855f7'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 11 } } }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // Initial render
+    renderPapers();
+  </script>
+</body>
+</html>
