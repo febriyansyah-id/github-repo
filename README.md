@@ -53,11 +53,12 @@ This hub coordinates multiple specialized repositories spanning four core techni
 
 ---
 
-### ⚙️ 3. Enterprise Infrastructure & Toolkits
+### ⚙️ 3. Enterprise Infrastructure & Presales Solutions
 
 | Repository | Focus & Discipline | Key Highlights & Achievements | Status |
 | :--- | :--- | :--- | :---: |
-| [**INFRASTRUCTURE**](./INFRASTRUCTURE) | Presales & Infrastructure Engineering | Enterprise presales toolkit: network discovery (SNMP/ping), modular Docker stacks, host health agents, and encrypted secrets vault. | [![Public](https://img.shields.io/badge/Repo-Public-brightgreen)](./INFRASTRUCTURE) |
+| [**INFRASTRUCTURE**](./INFRASTRUCTURE) | Presales & Infrastructure Engineering | Enterprise presales toolkit: 4 sub-infra titles (compute-orchestrator, storage-health, network-discovery, network-security-vault) with interactive command center. | [![Public](https://img.shields.io/badge/Repo-Public-brightgreen)](./INFRASTRUCTURE) |
+| [**PRODUCT-REVIEWS**](./PRODUCT-REVIEWS) | Enterprise Presales & Product Benchmarks | Rigorous vendor-neutral technology evaluations, POC benchmarks, and scoring matrix across Datacenter, Network, Security & Cloud. | [![Public](https://img.shields.io/badge/Repo-Public-brightgreen)](./PRODUCT-REVIEWS) |
 
 ---
 
@@ -65,6 +66,7 @@ This hub coordinates multiple specialized repositories spanning four core techni
 
 | Repository | Focus & Discipline | Key Highlights & Achievements | Status |
 | :--- | :--- | :--- | :---: |
+| [**RESEARCH-PUBLICATIONS**](./RESEARCH-PUBLICATIONS) | Original Academic Research & Publications | Original research papers, conference preprints, and datasets with permanent Zenodo DOI (Vision Mamba, Banking Fraud AI). | [![Public](https://img.shields.io/badge/Repo-Public-brightgreen)](./RESEARCH-PUBLICATIONS) |
 | [**PAPER-REVIEW**](./PAPER-REVIEW) | Academic Paper Reviews & Literature | **61 research papers** reviewed (2023–2026): Vision Transformers (ViT), Vision Mamba (ViM), Image-based Malware Classification, and NLP. | [![Public](https://img.shields.io/badge/Repo-Public-brightgreen)](./PAPER-REVIEW) |
 | [**LECTURES-SMTIII-PRIVATE**](./LECTURES-SMTIII-PRIVATE) | Semester III Graduate Curriculum | Comprehensive lecture modules with slide previews, summaries, and code: *Advanced Computer Vision* (P01–P16), *Advanced NLP*, and *Big Data*. | [![Private](https://img.shields.io/badge/Repo-Private-red)](./LECTURES-SMTIII-PRIVATE) |
 | [**LECTURES-SMTII-PRIVATE**](./LECTURES-SMTII-PRIVATE) | Semester II Graduate Curriculum | Postgraduate course materials, lab assignments, and semester research archives. | [![Private](https://img.shields.io/badge/Repo-Private-red)](./LECTURES-SMTII-PRIVATE) |
@@ -92,9 +94,11 @@ github-repo/
 ├── HACKTHEBOX/               # Retired HTB walkthroughs (Level 61 Master verified)
 ├── HACKTHEBOX-PRIVATE/       # Active ongoing HTB research pool
 ├── HUGGINGFACE/              # Model fine-tuning, Gradio deployment & LLM chat
-├── INFRASTRUCTURE/           # Presales infrastructure toolkit & Docker stacks
+├── INFRASTRUCTURE/           # 4 Sub-infra titles (Compute, Storage, Network, Security)
+├── PRODUCT-REVIEWS/          # Enterprise tech evaluations & presales POC benchmarks
 ├── KAGGLE/                   # Production Kaggle notebook collections
 ├── COLLAB/                   # Collaborative ML notebooks & preprocessing
+├── RESEARCH-PUBLICATIONS/    # Original publications & preprints with Zenodo DOI
 ├── PAPER-REVIEW/             # 61 Research papers (ViT, ViM, Malware Classification)
 └── LECTURES-SMT[I-III]/      # MTI postgraduate lecture modules & assignments
 ```
